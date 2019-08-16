@@ -12,6 +12,7 @@
 * [AWS account](https://aws.amazon.com/account/)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [kops](https://github.com/kubernetes/kops)
+* [hub](https://hub.github.com/)
 * Kubernetes, Docker, Linux, AWS knowledge required
 
 ## Content

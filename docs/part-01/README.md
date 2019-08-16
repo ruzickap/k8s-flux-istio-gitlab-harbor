@@ -158,7 +158,7 @@ kops create cluster \
   --zones=eu-central-1a \
   --node-count=3 \
   --node-size=t3.large \
-  --node-volume-size=20 \
+  --node-volume-size=10 \
   --master-count=1 \
   --master-size=t3.small \
   --master-volume-size=10 \

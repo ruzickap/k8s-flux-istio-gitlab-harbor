@@ -52,12 +52,17 @@ DEMO_PROMPT="${GREEN}➜ ${CYAN}$ "
 
 [ ! -d .git ] && git clone --quiet https://github.com/ruzickap/k8s-flux-knative-gitlab-harbor && cd k8s-flux-knative-gitlab-harbor
 
-sed docs/part-01/README.md \
+sed docs/part-0{1,2}/README.md \
   -e '/^## Configure AWS/,/^Create policy allowing the cert-manager to change Route 53 settings./d' \
 | \
-sed -n '/^```bash.*/,/^```$/p' \
+sed -n '/^```bash$/,/^```$/p;/^-----$/p' \
 | \
 sed \
+  -e 's/^-----$/\
+p  ""\
+p  "################################################################################################### Press <ENTER> to continue"\
+wait\
+/' \
   -e 's/^```bash.*/\
 pe '"'"'/' \
   -e 's/^```$/'"'"'/' \
