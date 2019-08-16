@@ -26,6 +26,12 @@ Remove K8s cluster:
 kops delete cluster --name=${USER}-k8s.${MY_DOMAIN} --yes --state=s3://${USER}-kops-k8s
 ```
 
+Delete GitHub repository:
+
+```bash
+hub delete -y ruzickap/k8s-flux-repository
+```
+
 Remove S3 bucket used for storing the configuration by kops:
 
 ```bash
@@ -50,6 +56,12 @@ USER_ACCESS_KEYS=$(aws iam list-access-keys --user-name ${USER}-route53 --query 
 aws iam delete-access-key --user-name ${USER}-route53 --access-key-id ${USER_ACCESS_KEYS}
 
 aws iam delete-user --user-name ${USER}-route53
+```
+
+Remove `tmp` directory:
+
+```bash
+rm -rf tmp
 ```
 
 Remove other files:
