@@ -165,7 +165,6 @@ kops create cluster \
   --dns-zone=${MY_DOMAIN} \
   --cloud-labels "Owner=${USER},Environment=Test,Division=Services" \
   --ssh-public-key $HOME/.ssh/id_rsa.pub \
-  --create-kube-config=false \
   --yes
 ```
 
