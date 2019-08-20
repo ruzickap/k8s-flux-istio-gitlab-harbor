@@ -79,13 +79,10 @@ kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deplo
 ```bash
 helm install --name flux --namespace flux --wait fluxcd/flux \
   --set git.email="petr.ruzicka@gmail.com" \
-  --set git.pollInterval=1m \
   --set git.url=git@github.com:ruzickap/k8s-flux-repository \
   --set git.user="Flux" \
-  --set helmOperator.chartsSyncInterval=1m \
   --set helmOperator.create=true \
   --set helmOperator.createCRD=false \
-  --set registry.pollInterval=1m \
   --set syncGarbageCollection.enabled=true
 ```
 
