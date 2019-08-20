@@ -58,6 +58,12 @@ aws iam delete-access-key --user-name ${USER}-route53 --access-key-id ${USER_ACC
 aws iam delete-user --user-name ${USER}-route53
 ```
 
+Cleanup + Remove Helm:
+
+```bash
+rm -rf /home/${USER}/.helm
+```
+
 Remove `tmp` directory:
 
 ```bash
