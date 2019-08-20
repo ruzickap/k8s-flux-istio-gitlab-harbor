@@ -1,5 +1,28 @@
 # Install Helm + Flux
 
+It's necessary to create git repository for Flux:
+
+```bash
+hub create -d "Flux repository for k8s-flux-knative-gitlab-harbor" -h "https://ruzickap.github.io/k8s-flux-knative-gitlab-harbor/" ruzickap/k8s-flux-repository
+```
+
+```bash
+git -C tmp clone git@github.com:ruzickap/k8s-flux-repository.git
+```
+
+```bash
+cp -R files/flux-repository/README.md tmp/k8s-flux-repository/
+mkdir tmp/k8s-flux-repository/{namespaces,releases,workloads}
+```
+
+```bash
+git -C tmp/k8s-flux-repository add .
+git -C tmp/k8s-flux-repository commit -m "Initial commit"
+git -C tmp/k8s-flux-repository push
+```
+
+## Install Helm
+
 Install [Helm](https://helm.sh/) binary:
 
 ```bash
@@ -44,6 +67,7 @@ Add the Flux repository:
 
 ```bash
 helm repo add fluxcd https://charts.fluxcd.io
+helm update
 ```
 
 Apply the Helm Release CRD:
@@ -53,35 +77,16 @@ kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deplo
 ```
 
 ```bash
-helm install --name flux fluxcd/flux --namespace flux --wait \
-  --set helmOperator.create=true \
-  --set helmOperator.createCRD=false \
+helm install --name flux --namespace flux --wait fluxcd/flux \
+  --set git.email="petr.ruzicka@gmail.com" \
+  --set git.pollInterval=1m \
   --set git.url=git@github.com:ruzickap/k8s-flux-repository \
   --set git.user="Flux" \
-  --set git.email="petr.ruzicka@gmail.com"
-  --set helmOperator.chartsSyncInterval=30s \
-  --set git.pollInterval=30s \
-  --set registry.pollInterval=30s
-```
-
-It's necessary to create git repository for Flux:
-
-```bash
-hub create -d "Flux repository for k8s-flux-knative-gitlab-harbor" -h "https://ruzickap.github.io/k8s-flux-knative-gitlab-harbor/" ruzickap/k8s-flux-repository
-```
-
-```bash
-git -C tmp clone git@github.com:ruzickap/k8s-flux-repository.git
-```
-
-```bash
-cp -R files/flux-repository/* tmp/k8s-flux-repository/
-```
-
-```bash
-git -C tmp/k8s-flux-repository add .
-git -C tmp/k8s-flux-repository commit -m "Initial commit"
-git -C tmp/k8s-flux-repository push
+  --set helmOperator.chartsSyncInterval=1m \
+  --set helmOperator.create=true \
+  --set helmOperator.createCRD=false \
+  --set registry.pollInterval=1m \
+  --set syncGarbageCollection.enabled=true
 ```
 
 Install fluxcli:
@@ -91,10 +96,17 @@ sudo wget -q -c https://github.com/fluxcd/flux/releases/download/1.13.3/fluxctl_
 sudo chmod a+x /usr/local/bin/fluxctl
 ```
 
+Set the namespace (`flux`) where flux was installed for running `fluxctl`:
+
+```bash
+export FLUX_FORWARD_NAMESPACE=flux
+```
+
 Get the Flux public ssh key
 
 ```bash
-fluxctl identity --k8s-fwd-ns flux
+fluxctl identity
+chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new
 ```
 
 Add the key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"
