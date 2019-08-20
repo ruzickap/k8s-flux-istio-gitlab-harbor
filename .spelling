@@ -1,10 +1,14 @@
 awscli
+Cleanup
+external-dns
 fluxcli
 GitLab
+Istio
 k8s
 Knative
 kops
 kubectl
+kubed
 Kubernetes
 nameservers
 ssh
