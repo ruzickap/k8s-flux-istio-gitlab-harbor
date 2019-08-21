@@ -1,0 +1,14 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: istio-init
+  namespace: istio-system
+  annotations:
+    flux.weave.works/automated: "false"
+spec:
+  releaseName: istio-init
+  targetNamespace: istio-system
+  chart:
+    repository: https://storage.googleapis.com/istio-release/releases/1.2.3/charts/
+    name: istio-init
+    version: 1.2.3

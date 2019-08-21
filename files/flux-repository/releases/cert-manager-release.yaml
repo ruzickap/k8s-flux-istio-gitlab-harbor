@@ -1,0 +1,26 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+  annotations:
+    flux.weave.works/automated: "false"
+    flux.weave.works/tag.cert-manager-controller: glob:~v0.9.*
+spec:
+  releaseName: cert-manager
+  targetNamespace: cert-manager
+  chart:
+    repository: https://charts.jetstack.io
+    name: cert-manager
+    version: v0.9.0
+  values:
+    image:
+      repository: quay.io/jetstack/cert-manager-controller
+      tag: v0.9.0
+    webhook:
+      enabled: false
+
+# curl -L -s https://charts.jetstack.io/index.yaml
+# curl https://quay.io/v1/repositories/jetstack/cert-manager-controller/tags | jq
+# curl https://quay.io/v2/jetstack/cert-manager-controller/manifests/latest| jq
+# curl https://quay.io/v1/repositories/jetstack/cert-manager-controller/tags | jq '.' | less

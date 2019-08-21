@@ -1,0 +1,70 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: gitlab
+  namespace: gitlab
+  annotations:
+    flux.weave.works/automated: "false"
+spec:
+  releaseName: gitlab
+  targetNamespace: gitlab
+  chart:
+    repository: https://charts.gitlab.io/
+    name: gitlab
+    version: 1.9.6
+  values:
+    certmanager:
+      install: false
+    gitlab-runner:
+      install: false
+    gitlab:
+      gitaly:
+        persistence:
+          size: 1Gi
+      unicorn:
+        ingress:
+          enabled: false
+    global:
+      appConfig:
+        cron_jobs:
+          ci_archive_traces_cron_worker:
+            cron: "17 * * * *"
+          expire_build_artifacts_worker:
+            cron: "50 * * * *"
+          pipeline_schedule_worker:
+            cron: "19 * * * *"
+          repository_archive_cache_worker:
+            cron: "0 * * * *"
+          repository_check_worker:
+            cron: "20 * * * *"
+          stuck_ci_jobs_worker:
+            cron: "0 * * * *"
+      gravatar:
+        plainUrl: "https://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon"
+        sslUrl: "https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon"
+      certificates:
+        customCAs:
+          - secret: custom-ca
+      edition: ce
+      hosts:
+        domain: ${MY_DOMAIN}
+      ingress:
+        configureCertmanager: false
+        enabled: false
+      initialRootPassword:
+        secret: gitlab-initial-root-password
+    minio:
+      persistence:
+        size: 5Gi
+    nginx-ingress:
+      enabled: false
+    postgresql:
+      persistence:
+        size: 1Gi
+    prometheus:
+      install: false
+    redis:
+      persistence:
+        size: 1Gi
+    registry:
+      enabled: false

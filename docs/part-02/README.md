@@ -103,7 +103,7 @@ Get the Flux public ssh key
 
 ```bash
 fluxctl identity
-chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new
+chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new &
 ```
 
 Add the key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"

@@ -1,0 +1,81 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-services-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http-istio-services
+      protocol: HTTP
+    hosts:
+    - grafana-istio.${MY_DOMAIN}
+    - jaeger-istio.${MY_DOMAIN}
+    - kiali-istio.${MY_DOMAIN}
+  - port:
+      number: 443
+      name: https-istio-services
+      protocol: HTTPS
+    hosts:
+    - grafana-istio.${MY_DOMAIN}
+    - jaeger-istio.${MY_DOMAIN}
+    - kiali-istio.${MY_DOMAIN}
+    tls:
+      credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
+      mode: SIMPLE
+      privateKey: sds
+      serverCertificate: sds
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grafana-istio-virtual-service
+  namespace: istio-system
+spec:
+  hosts:
+  - grafana-istio.${MY_DOMAIN}
+  gateways:
+  - istio-services-gateway
+  http:
+  - route:
+    - destination:
+        host: grafana.istio-system.svc.cluster.local
+        port:
+          number: 3000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: jaeger-istio-virtual-service
+  namespace: istio-system
+spec:
+  hosts:
+  - jaeger-istio.${MY_DOMAIN}
+  gateways:
+  - istio-services-gateway
+  http:
+  - route:
+    - destination:
+        host: tracing.istio-system.svc.cluster.local
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali-istio-virtual-service
+  namespace: istio-system
+spec:
+  hosts:
+  - kiali-istio.${MY_DOMAIN}
+  gateways:
+  - istio-services-gateway
+  http:
+  - route:
+    - destination:
+        host: kiali.istio-system.svc.cluster.local
+        port:
+          number: 20001

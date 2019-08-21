@@ -1,0 +1,77 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: istio
+  namespace: istio-system
+  annotations:
+    flux.weave.works/automated: "false"
+spec:
+  releaseName: istio
+  targetNamespace: istio-system
+  chart:
+    repository: https://storage.googleapis.com/istio-release/releases/1.2.3/charts/
+    name: istio
+    version: 1.2.3
+  values:
+    gateways:
+      istio-ingressgateway:
+        autoscaleMax: 1
+        autoscaleMin: 1
+        ports:
+          - name: status-port
+            port: 15020
+            targetPort: 15020
+          - name: http
+            nodePort: 31380
+            port: 80
+            targetPort: 80
+          - name: https
+            nodePort: 31390
+            port: 443
+          - name: ssh
+            nodePort: 31400
+            port: 22
+        sds:
+          enabled: true
+    global:
+      disablePolicyChecks: true
+      k8sIngress:
+        enableHttps: true
+        enabled: true
+    proxy:
+      autoInject: disabled
+    grafana:
+      datasources:
+        datasources.yaml:
+          datasources:
+            - access: proxy
+              editable: true
+              isDefault: true
+              jsonData:
+                timeInterval: 5s
+              name: Prometheus
+              orgId: 1
+              type: prometheus
+              url: http://prometheus-system-np.knative-monitoring.svc.cluster.local:8080
+      enabled: true
+    kiali:
+      contextPath: /
+      createDemoSecret: true
+      dashboard:
+        grafanaURL: http://grafana.${MY_DOMAIN}/
+        jaegerURL: http://jaeger.${MY_DOMAIN}/
+      enabled: true
+      prometheusAddr: http://prometheus-system-np.knative-monitoring.svc.cluster.local:8080
+    mixer:
+      adapters:
+        prometheus:
+          enabled: false
+    pilot:
+      traceSampling: 100
+    prometheus:
+      enabled: false
+    sidecarInjectorWebhook:
+      enableNamespacesByDefault: true
+      enabled: true
+    tracing:
+      enabled: true
