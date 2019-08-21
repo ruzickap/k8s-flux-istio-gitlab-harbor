@@ -1,14 +1,14 @@
 module.exports = {
   title: "Kubernetes + Flux + Knative + GitLab + Harbor",
   description: "Kubernetes + Flux + Knative + GitLab + Harbor",
-  base: '/k8s-flux-knative-gitlab-harbor/',
+  base: '/k8s-flux-istio-gitlab-harbor/',
   head: [
     ['link', { rel: "icon", href: "https://kubernetes.io/images/favicon.png" }]
   ],
   themeConfig: {
     displayAllHeaders: true,
     lastUpdated: true,
-    repo: 'ruzickap/k8s-flux-knative-gitlab-harbor',
+    repo: 'ruzickap/k8s-flux-istio-gitlab-harbor',
     docsDir: 'docs',
     editLinks: true,
     logo: 'https://kubernetes.io/images/favicon.png',

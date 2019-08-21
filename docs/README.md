@@ -1,9 +1,9 @@
 # Kubernetes + Flux + Knative + GitLab + Harbor
 
-[![Build Status](https://travis-ci.com/ruzickap/k8s-flux-knative-gitlab-harbor.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-flux-knative-gitlab-harbor)
+[![Build Status](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor)
 
-* GitHub repository: [https://github.com/ruzickap/k8s-flux-knative-gitlab-harbor](https://github.com/ruzickap/k8s-flux-knative-gitlab-harbor)
-* Web Pages: [https://ruzickap.github.io/k8s-flux-knative-gitlab-harbor](https://ruzickap.github.io/k8s-flux-knative-gitlab-harbor)
+* GitHub repository: [https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor)
+* Web Pages: [https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor](https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor)
 
 ## Requirements
 

@@ -135,11 +135,11 @@ Generate SSH keys if not exists:
 test -f $HOME/.ssh/id_rsa || ( install -m 0700 -d $HOME/.ssh && ssh-keygen -b 2048 -t rsa -f $HOME/.ssh/id_rsa -q -N "" )
 ```
 
-Clone the `k8s-flux-knative-gitlab-harbor` Git repository if it wasn't done already:
+Clone the `k8s-flux-istio-gitlab-harbor` Git repository if it wasn't done already:
 
 ```bash
 if [ ! -d .git ]; then
-  git clone --quiet https://github.com/ruzickap/k8s-flux-knative-gitlab-harbor && cd k8s-flux-knative-gitlab-harbor
+  git clone --quiet https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor && cd k8s-flux-istio-gitlab-harbor
 fi
 ```
 

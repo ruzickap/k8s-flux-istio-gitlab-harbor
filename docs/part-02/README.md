@@ -3,7 +3,7 @@
 It's necessary to create git repository for Flux:
 
 ```bash
-hub create -d "Flux repository for k8s-flux-knative-gitlab-harbor" -h "https://ruzickap.github.io/k8s-flux-knative-gitlab-harbor/" ruzickap/k8s-flux-repository
+hub create -d "Flux repository for k8s-flux-istio-gitlab-harbor" -h "https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor/" ruzickap/k8s-flux-repository
 ```
 
 ```bash

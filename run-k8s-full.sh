@@ -50,7 +50,7 @@ DEMO_PROMPT="${GREEN}➜ ${CYAN}$ "
 
 # ./run-k8s-full.sh
 
-[ ! -d .git ] && git clone --quiet https://github.com/ruzickap/k8s-flux-knative-gitlab-harbor && cd k8s-flux-knative-gitlab-harbor
+[ ! -d .git ] && git clone --quiet https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor && cd k8s-flux-istio-gitlab-harbor
 
 sed docs/part-0{1..3}/README.md \
   -e '/^## Configure AWS/,/^Create policy allowing the cert-manager to change Route 53 settings./d' \

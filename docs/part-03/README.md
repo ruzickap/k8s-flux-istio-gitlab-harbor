@@ -138,7 +138,7 @@ sleep 10
 
 ```bash
 envsubst < files/flux-repository/releases/istio-release.yaml   > tmp/k8s-flux-repository/releases/istio-release.yaml
-envsubst < files/flux-repository/workloads/istio-gateway.yaml          > tmp/k8s-flux-repository/workloads/istio-gateway.yaml
+envsubst < files/flux-repository/workloads/istio-gateway.yaml  > tmp/k8s-flux-repository/workloads/istio-gateway.yaml
 envsubst < files/flux-repository/workloads/istio-services.yaml > tmp/k8s-flux-repository/workloads/istio-services.yaml
 
 git -C tmp/k8s-flux-repository add --verbose .
