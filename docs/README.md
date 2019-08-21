@@ -1,4 +1,4 @@
-# Kubernetes + Flux + Knative + GitLab + Harbor
+# Kubernetes + Flux + Istio + GitLab + Harbor
 
 [![Build Status](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor)
 
@@ -18,3 +18,5 @@
 ## Content
 
 * [Part 01 - Create "kops" cluster in AWS](part-01/README.md)
+* [Part 02 - Install Helm + Flux](part-02/README.md)
+* [Part 03 - Install cert-manager, kubed, Istio, external-dns, Harbor, GitLab using Flux](part-03/README.md)

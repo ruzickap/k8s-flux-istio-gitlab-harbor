@@ -29,7 +29,7 @@ Install necessary software:
 ```bash
 if [ -x /usr/bin/apt ]; then
   apt update -qq
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq awscli curl git jq openssh-client sudo wget > /dev/null
+  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq awscli curl gettext-base git jq openssh-client sudo wget > /dev/null
 fi
 ```
 
@@ -48,6 +48,15 @@ Install [kops](https://github.com/kubernetes/kops):
 if [ ! -x /usr/local/bin/kops ]; then
   sudo curl -s -L "https://github.com/kubernetes/kops/releases/download/1.14.0-alpha.3/kops-linux-amd64" > /usr/local/bin/kops
   sudo chmod a+x /usr/local/bin/kops
+fi
+```
+
+Install [hub](https://hub.github.com/):
+
+```bash
+if [ ! -x /usr/local/bin/hub ]; then
+  curl -s -L https://github.com/github/hub/releases/download/v2.12.3/hub-linux-amd64-2.12.3.tgz | tar xzf - -C /tmp/
+  sudo mv /tmp/hub-linux-amd64-2.12.3/bin/hub /usr/local/bin/
 fi
 ```
 

@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Kubernetes + Flux + Knative + GitLab + Harbor",
-  description: "Kubernetes + Flux + Knative + GitLab + Harbor",
+  title: "Kubernetes + Flux + Istio + GitLab + Harbor",
+  description: "Kubernetes + Flux + Istio + GitLab + Harbor",
   base: '/k8s-flux-istio-gitlab-harbor/',
   head: [
     ['link', { rel: "icon", href: "https://kubernetes.io/images/favicon.png" }]
@@ -20,7 +20,6 @@ module.exports = {
           { text: 'Flux', link: 'https://www.weave.works/oss/flux/' },
           { text: 'GitLab', link: 'https://gitlab.com' },
           { text: 'Harbor', link: 'https://goharbor.io' },
-          { text: 'Knative', link: 'https://cloud.google.com/knative' },
         ]
       }
     ],

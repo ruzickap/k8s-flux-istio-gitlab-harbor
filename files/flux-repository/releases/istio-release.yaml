@@ -34,25 +34,10 @@ spec:
         sds:
           enabled: true
     global:
-      disablePolicyChecks: true
       k8sIngress:
         enableHttps: true
         enabled: true
-    proxy:
-      autoInject: disabled
     grafana:
-      datasources:
-        datasources.yaml:
-          datasources:
-            - access: proxy
-              editable: true
-              isDefault: true
-              jsonData:
-                timeInterval: 5s
-              name: Prometheus
-              orgId: 1
-              type: prometheus
-              url: http://prometheus-system-np.knative-monitoring.svc.cluster.local:8080
       enabled: true
     kiali:
       contextPath: /
@@ -61,17 +46,7 @@ spec:
         grafanaURL: http://grafana.${MY_DOMAIN}/
         jaegerURL: http://jaeger.${MY_DOMAIN}/
       enabled: true
-      prometheusAddr: http://prometheus-system-np.knative-monitoring.svc.cluster.local:8080
-    mixer:
-      adapters:
-        prometheus:
-          enabled: false
     pilot:
       traceSampling: 100
-    prometheus:
-      enabled: false
-    sidecarInjectorWebhook:
-      enableNamespacesByDefault: true
-      enabled: true
     tracing:
       enabled: true

@@ -7,6 +7,8 @@ hub create -d "Flux repository for k8s-flux-istio-gitlab-harbor" -h "https://ruz
 ```
 
 ```bash
+if [ ! -n "$(grep "^github.com " ~/.ssh/known_hosts)" ]; then ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null; fi
+git config --global user.email "petr.ruzicka@gmail.com"
 git -C tmp clone git@github.com:ruzickap/k8s-flux-repository.git
 ```
 
@@ -103,7 +105,7 @@ Get the Flux public ssh key
 
 ```bash
 fluxctl identity
-chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new &
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new & fi
 ```
 
 Add the key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"

@@ -9,20 +9,22 @@ spec:
   servers:
   - port:
       number: 80
-      name: http-istio-services
+      name: http-services
       protocol: HTTP
     hosts:
-    - grafana-istio.${MY_DOMAIN}
-    - jaeger-istio.${MY_DOMAIN}
-    - kiali-istio.${MY_DOMAIN}
+    - grafana.${MY_DOMAIN}
+    - jaeger.${MY_DOMAIN}
+    - kiali.${MY_DOMAIN}
+    - prometheus.${MY_DOMAIN}
   - port:
       number: 443
-      name: https-istio-services
+      name: https-services
       protocol: HTTPS
     hosts:
-    - grafana-istio.${MY_DOMAIN}
-    - jaeger-istio.${MY_DOMAIN}
-    - kiali-istio.${MY_DOMAIN}
+    - grafana.${MY_DOMAIN}
+    - jaeger.${MY_DOMAIN}
+    - kiali.${MY_DOMAIN}
+    - prometheus.${MY_DOMAIN}
     tls:
       credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
       mode: SIMPLE
@@ -32,11 +34,11 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: grafana-istio-virtual-service
+  name: grafana-virtual-service
   namespace: istio-system
 spec:
   hosts:
-  - grafana-istio.${MY_DOMAIN}
+  - grafana.${MY_DOMAIN}
   gateways:
   - istio-services-gateway
   http:
@@ -49,11 +51,11 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: jaeger-istio-virtual-service
+  name: jaeger-virtual-service
   namespace: istio-system
 spec:
   hosts:
-  - jaeger-istio.${MY_DOMAIN}
+  - jaeger.${MY_DOMAIN}
   gateways:
   - istio-services-gateway
   http:
@@ -66,11 +68,11 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: kiali-istio-virtual-service
+  name: kiali-virtual-service
   namespace: istio-system
 spec:
   hosts:
-  - kiali-istio.${MY_DOMAIN}
+  - kiali.${MY_DOMAIN}
   gateways:
   - istio-services-gateway
   http:
@@ -79,3 +81,21 @@ spec:
         host: kiali.istio-system.svc.cluster.local
         port:
           number: 20001
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prometheus-virtual-service
+  namespace: istio-system
+spec:
+  hosts:
+  - prometheus.${MY_DOMAIN}
+  gateways:
+  - istio-services-gateway
+  http:
+  - route:
+    - destination:
+        host: prometheus.istio-system.svc.cluster.local
+        port:
+          number: 9090
+---
