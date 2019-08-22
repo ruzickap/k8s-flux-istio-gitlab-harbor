@@ -209,16 +209,10 @@ fluxctl sync
 
 Try to open these URLs:
 
-* [https://harbor.mylabs.dev](https://harbor.mylabs.dev)
-* [http://harbor.mylabs.dev](http://harbor.mylabs.dev)
-* [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev)
-* [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
+* [https://harbor.mylabs.dev](https://harbor.mylabs.dev), [http://harbor.mylabs.dev](http://harbor.mylabs.dev)
+* [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev), [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
 * `ssh://gitlab.mylabs.dev`
-* [https://grafana.mylabs.dev](https://grafana.mylabs.dev)
-* [http://grafana.mylabs.dev](http://grafana.mylabs.dev)
-* [https://jaeger.mylabs.dev](https://jaeger.mylabs.dev)
-* [http://jaeger.mylabs.dev](http://jaeger.mylabs.dev)
-* [https://kiali.mylabs.dev](https://kiali.mylabs.dev)
-* [http://kiali.mylabs.dev](http://kiali.mylabs.dev)
-* [https://prometheus.mylabs.dev](https://prometheus.mylabs.dev)
-* [http://prometheus.mylabs.dev](http://prometheus.mylabs.dev)
+* [https://grafana.mylabs.dev](https://grafana.mylabs.dev), [http://grafana.mylabs.dev](http://grafana.mylabs.dev)
+* [https://jaeger.mylabs.dev](https://jaeger.mylabs.dev), [http://jaeger.mylabs.dev](http://jaeger.mylabs.dev)
+* [https://kiali.mylabs.dev](https://kiali.mylabs.dev), [http://kiali.mylabs.dev](http://kiali.mylabs.dev)
+* [https://prometheus.mylabs.dev](https://prometheus.mylabs.dev), [http://prometheus.mylabs.dev](http://prometheus.mylabs.dev)
