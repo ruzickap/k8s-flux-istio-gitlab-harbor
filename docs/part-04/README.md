@@ -208,7 +208,8 @@ default:deployment/podinfo  success
 Commit pushed:  99dd0ba
 ```
 
-Flux will now automatically deploy a new version of a workload whenever one is available and commit the new configuration to the version control system.
+Flux will now automatically deploy a new version of a workload whenever one is
+available and commit the new configuration to the version control system.
 
 ```bash
 fluxctl list-workloads
@@ -265,7 +266,7 @@ default:deployment/podinfo  podinfo    stefanprodan/podinfo
 ...
 ```
 
-# Image Tag Filtering
+## Image Tag Filtering
 
 ```bash
 fluxctl policy --workload=default:deployment/podinfo --tag-all='2.0.*'
@@ -304,7 +305,6 @@ spec:
   replicas: 1
   selector:
 ```
-
 
 ```bash
 fluxctl release --workload=default:deployment/podinfo --update-all-images

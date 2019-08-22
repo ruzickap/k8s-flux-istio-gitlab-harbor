@@ -3,8 +3,6 @@
 ![Clean-up](https://raw.githubusercontent.com/aws-samples/eks-workshop/65b766c494a5b4f5420b2912d8373c4957163541/static/images/cleanup.svg?sanitize=true
 "Clean-up")
 
------
-
 Configure `kubeconfig`:
 
 ```bash
@@ -13,11 +11,12 @@ kops export kubecfg ${USER}-k8s.${MY_DOMAIN} --state=s3://${USER}-kops-k8s --kub
 export KUBECONFIG=/tmp/kubeconfig.conf
 ```
 
-Remove installed applications
+Remove DNS records:
 
 ```bash
-#helm delete istio
-kubectl delete virtualservices.networking.istio.io --all-namespaces --all
+kubectl delete gateways.networking.istio.io --all --all-namespaces
+kubectl delete pod -n external-dns --all
+sleep 10
 ```
 
 Remove K8s cluster:
