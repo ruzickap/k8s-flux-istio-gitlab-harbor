@@ -79,7 +79,7 @@ kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deplo
 ```
 
 ```bash
-helm install --name flux --namespace flux --wait fluxcd/flux \
+helm install --name flux --namespace flux --wait --version 0.12.0 fluxcd/flux \
   --set git.email="petr.ruzicka@gmail.com" \
   --set git.url=git@github.com:ruzickap/k8s-flux-repository \
   --set git.user="Flux" \
@@ -91,7 +91,7 @@ helm install --name flux --namespace flux --wait fluxcd/flux \
 Install fluxcli:
 
 ```bash
-sudo wget -q -c https://github.com/fluxcd/flux/releases/download/1.13.3/fluxctl_linux_amd64 -O /usr/local/bin/fluxctl
+sudo wget -q -c https://github.com/fluxcd/flux/releases/download/1.14.0/fluxctl_linux_amd64 -O /usr/local/bin/fluxctl
 sudo chmod a+x /usr/local/bin/fluxctl
 ```
 
