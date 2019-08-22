@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://charts.gitlab.io/
     name: gitlab
-    version: 1.9.6
+    version: 1.9.7
   values:
     certmanager:
       install: false

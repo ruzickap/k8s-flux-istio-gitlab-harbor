@@ -90,6 +90,19 @@ fluxctl sync
 sleep 150
 ```
 
+Output:
+
+```text
+add 'workloads/podinfo.yaml'
+[master 2328c1a] Add podinfo
+ 1 file changed, 72 insertions(+)
+ create mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 2328c1a
+Waiting for 2328c1a to be applied ...
+Done.
+```
+
 ```bash
 curl http://podinfo.mylabs.dev
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser http://podinfo.mylabs.dev & fi

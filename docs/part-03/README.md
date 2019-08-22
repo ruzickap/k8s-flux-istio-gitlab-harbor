@@ -18,20 +18,11 @@ Output:
 add 'namespaces/cert-manager-ns.yaml'
 add 'releases/cert-manager-release.yaml'
 add 'workloads/cert-manager-00-crds.yaml'
-[master bc13750] Add cert-manager
+[master 90f78a1] Add cert-manager
  3 files changed, 1458 insertions(+)
  create mode 100644 namespaces/cert-manager-ns.yaml
  create mode 100644 releases/cert-manager-release.yaml
  create mode 100644 workloads/cert-manager-00-crds.yaml
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.122]:443' (RSA) to the list of known hosts.
-Enumerating objects: 9, done.
-Counting objects: 100% (9/9), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (7/7), done.
-Writing objects: 100% (8/8), 8.59 KiB | 1.07 MiB/s, done.
-Total 8 (delta 0), reused 0 (delta 0)
-To github.com:ruzickap/k8s-flux-repository.git
-   6b7646c..bc13750  master -> master
 ```
 
 ```bash
@@ -43,8 +34,8 @@ Output:
 
 ```text
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is bc13750
-Waiting for bc13750 to be applied ...
+Revision of master to apply is 90f78a1
+Waiting for 90f78a1 to be applied ...
 Done.
 ```
 
@@ -160,22 +151,13 @@ Output:
 ```text
 add 'namespaces/kubed-ns.yaml'
 add 'releases/kubed-release.yaml'
-[master e452977] Add kubed
+[master 869bc1b] Add kubed
  2 files changed, 23 insertions(+)
  create mode 100644 namespaces/kubed-ns.yaml
  create mode 100644 releases/kubed-release.yaml
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
-Enumerating objects: 9, done.
-Counting objects: 100% (9/9), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (6/6), done.
-Writing objects: 100% (6/6), 814 bytes | 814.00 KiB/s, done.
-Total 6 (delta 0), reused 0 (delta 0)
-To github.com:ruzickap/k8s-flux-repository.git
-   bc13750..e452977  master -> master
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is e452977
-Waiting for e452977 to be applied ...
+Revision of master to apply is 869bc1b
+Waiting for 869bc1b to be applied ...
 Done.
 ```
 
@@ -210,22 +192,13 @@ Output:
 ```text
 add 'namespaces/istio-ns.yaml'
 add 'releases/istio-init-release.yaml'
-[master 9f828fa] Add istio-init
+[master a86b69c] Add istio-init
  2 files changed, 21 insertions(+)
  create mode 100644 namespaces/istio-ns.yaml
  create mode 100644 releases/istio-init-release.yaml
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
-Enumerating objects: 9, done.
-Counting objects: 100% (9/9), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (6/6), done.
-Writing objects: 100% (6/6), 898 bytes | 299.00 KiB/s, done.
-Total 6 (delta 0), reused 0 (delta 0)
-To github.com:ruzickap/k8s-flux-repository.git
-   e452977..9f828fa  master -> master
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is 9f828fa
-Waiting for 9f828fa to be applied ...
+Revision of master to apply is a86b69c
+Waiting for a86b69c to be applied ...
 Done.
 ```
 
@@ -246,24 +219,14 @@ Output:
 add 'releases/istio-release.yaml'
 add 'workloads/istio-gateway.yaml'
 add 'workloads/istio-services.yaml'
-[master 8f16f1a] Add istio
+[master 8ea8110] Add istio
  3 files changed, 177 insertions(+)
  create mode 100644 releases/istio-release.yaml
  create mode 100644 workloads/istio-gateway.yaml
  create mode 100644 workloads/istio-services.yaml
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
-Enumerating objects: 10, done.
-Counting objects: 100% (10/10), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (7/7), done.
-Writing objects: 100% (7/7), 1.66 KiB | 1.66 MiB/s, done.
-Total 7 (delta 1), reused 0 (delta 0)
-remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-To github.com:ruzickap/k8s-flux-repository.git
-   9f828fa..8f16f1a  master -> master
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is 8f16f1a
-Waiting for 8f16f1a to be applied ...
+Revision of master to apply is 8ea8110
+Waiting for 8ea8110 to be applied ...
 Done.
 ```
 

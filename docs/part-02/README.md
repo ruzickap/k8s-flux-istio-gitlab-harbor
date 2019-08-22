@@ -25,7 +25,6 @@ Output:
 
 ```text
 Cloning into 'k8s-flux-repository'...
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
 warning: You appear to have cloned an empty repository
 ```
 
@@ -50,7 +49,6 @@ mkdir: created directory 'tmp/k8s-flux-repository/workloads'
 [master (root-commit) 6b7646c] Initial commit
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
-Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
 Enumerating objects: 3, done.
 Counting objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 237 bytes | 237.00 KiB/s, done.

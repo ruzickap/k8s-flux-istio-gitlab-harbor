@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://helm.goharbor.io
     name: harbor
-    version: v1.1.2
+    version: v1.1.1
   values:
     expose:
       tls:
