@@ -9,7 +9,7 @@ envsubst < files/flux-repository/workloads/cert-manager-00-crds.yaml > tmp/k8s-f
 
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add cert-manager"
-git -C tmp/k8s-flux-repository push
+git -C tmp/k8s-flux-repository push -q
 ```
 
 Output:
@@ -151,7 +151,7 @@ envsubst < files/flux-repository/releases/kubed-release.yaml > tmp/k8s-flux-repo
 
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add kubed"
-git -C tmp/k8s-flux-repository push
+git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 
@@ -200,7 +200,7 @@ envsubst < files/flux-repository/releases/istio-init-release.yaml > tmp/k8s-flux
 
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add istio-init"
-git -C tmp/k8s-flux-repository push
+git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 sleep 10
 ```
@@ -236,7 +236,7 @@ envsubst < files/flux-repository/workloads/istio-services.yaml > tmp/k8s-flux-re
 
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add istio"
-git -C tmp/k8s-flux-repository push
+git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 

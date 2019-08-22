@@ -37,7 +37,7 @@ mkdir -v tmp/k8s-flux-repository/{namespaces,releases,workloads}
 
 git -C tmp/k8s-flux-repository add .
 git -C tmp/k8s-flux-repository commit -m "Initial commit"
-git -C tmp/k8s-flux-repository push
+git -C tmp/k8s-flux-repository push -q
 ```
 
 Output:
