@@ -1,5 +1,7 @@
 awscli
 Cleanup
+CronJobs
+DaemonSets
 external-dns
 fluxcli
 GitLab
@@ -10,4 +12,6 @@ kubectl
 kubed
 Kubernetes
 nameservers
+podinfo
 ssh
+StatefulSets
