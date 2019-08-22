@@ -6,6 +6,13 @@ Create git repository which will be used by Flux in GitHub:
 hub create -d "Flux repository for k8s-flux-istio-gitlab-harbor" -h "https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor/" ruzickap/k8s-flux-repository
 ```
 
+Output:
+
+```text
+A git remote named 'origin' already exists and is set to push to 'ssh://git@github.com/ruzickap/k8s-flux-istio-gitlab-harbor.git'.
+https://github.com/ruzickap/k8s-flux-repository
+```
+
 Clone newly create git repository:
 
 ```bash
@@ -36,6 +43,20 @@ git -C tmp/k8s-flux-repository push
 Output:
 
 ```text
+'files/flux-repository/README.md' -> 'tmp/k8s-flux-repository/README.md'
+mkdir: created directory 'tmp/k8s-flux-repository/namespaces'
+mkdir: created directory 'tmp/k8s-flux-repository/releases'
+mkdir: created directory 'tmp/k8s-flux-repository/workloads'
+[master (root-commit) 6b7646c] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+Warning: Permanently added '[ssh.github.com]:443,[192.30.253.123]:443' (RSA) to the list of known hosts.
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 237 bytes | 237.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To github.com:ruzickap/k8s-flux-repository.git
+ * [new branch]      master -> master
 ```
 
 ## Install Helm
@@ -49,6 +70,8 @@ curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -s
 Output:
 
 ```text
+Helm v2.14.3 is already v2.14.3
+Run 'helm init' to configure helm.
 ```
 
 Create a service account and a cluster role binding for Tiller:
@@ -232,6 +255,12 @@ Obtain the ssh public key through `fluxctl`:
 ```bash
 fluxctl identity
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/settings/keys/new & fi
+```
+
+Output:
+
+```text
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIwnEd0awRYwZbcHukvovcJqllWll7DthW4NYX3Y3Kr8j/ZqgIbMJbmF2E5bwvRk0puUfSFynMVuEZUu+1KqfPhcCFjY5AzjFHQqdrvoLMeuRx9wY0lAYCwbVUqPedCwkeHOCnpgtM+I3nW3AhlotIOgdzKebR+Ox7jjke0L4cuR7IySxhQdkrdwJtq0miN3zmWu8W4LplSBs0PdQYXrl1ApBZ39fB+WPgrorwvtIgCnXYSgyfj9d50VWZjpNdnLRB1etiKHqr1uF3e5cxNyc7CKn/A5L8Dkl9Aa2JS/IHp5ErNyfGzJrkiQs1V92k37xGHPDDkhxZhtI8gvkRy/Ar
 ```
 
 Add the ssh key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"

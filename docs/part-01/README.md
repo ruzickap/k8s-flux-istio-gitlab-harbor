@@ -99,17 +99,17 @@ Output:
 
 ```json
 {
-    "Policy": {
-        "PolicyName": "pruzicka-AmazonRoute53Domains-cert-manager",
-        "PolicyId": "ANPA36ZNO4Q4MTW5T5ZLX",
-        "Arn": "arn:aws:iam::822044714040:policy/pruzicka-AmazonRoute53Domains-cert-manager",
-        "Path": "/",
-        "DefaultVersionId": "v1",
-        "AttachmentCount": 0,
-        "IsAttachable": true,
-        "CreateDate": "2019-06-05T11:16:58Z",
-        "UpdateDate": "2019-06-05T11:16:58Z"
-    }
+  "Policy": {
+    "PolicyName": "pruzicka-AmazonRoute53Domains-cert-manager",
+    "PolicyId": "ANPA36ZNO4Q4LMUBSQ4TD",
+    "Arn": "arn:aws:iam::822044714040:policy/pruzicka-AmazonRoute53Domains-cert-manager",
+    "Path": "/",
+    "DefaultVersionId": "v1",
+    "AttachmentCount": 0,
+    "IsAttachable": true,
+    "CreateDate": "2019-08-22T08:51:57Z",
+    "UpdateDate": "2019-08-22T08:51:57Z"
+  }
 }
 ```
 
@@ -128,6 +128,15 @@ export ROUTE53_AWS_SECRET_ACCESS_KEY=$(awk -F\" "/SecretAccessKey/ { print \$4 }
 Output:
 
 ```json
+{
+  "User": {
+    "Path": "/",
+    "UserName": "pruzicka-route53",
+    "UserId": "AIDA36ZNO4Q4FHIAJAJCR",
+    "Arn": "arn:aws:iam::822044714040:user/pruzicka-route53",
+    "CreateDate": "2019-08-22T08:51:59Z"
+  }
+}
 ```
 
 The `AccessKeyId` and `SecretAccessKey` is need for creating the `ClusterIssuer`
@@ -155,7 +164,15 @@ fi
 Create S3 bucket where the kops will store cluster status:
 
 ```bash
-aws s3api create-bucket --bucket ${USER}-kops-k8s --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1
+aws s3api create-bucket --bucket ${USER}-kops-k8s --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1 | jq
+```
+
+Output:
+
+```json
+{
+    "Location": "http://pruzicka-kops-k8s.s3.amazonaws.com/"
+}
 ```
 
 Create Kubernetes cluster in AWS by using [kops](https://github.com/kubernetes/kops):
@@ -196,6 +213,12 @@ Store `kubeconfig` in current directory:
 kops export kubecfg ${USER}-k8s.${MY_DOMAIN} --state=s3://${USER}-kops-k8s --kubeconfig kubeconfig.conf
 ```
 
+Output:
+
+```text
+kops has set your kubectl context to pruzicka-k8s.mylabs.dev
+```
+
 Check if the new Kubernetes cluster is available:
 
 ```bash
@@ -206,6 +229,11 @@ kubectl get nodes -o wide
 Output:
 
 ```text
+NAME                                             STATUS   ROLES    AGE    VERSION   INTERNAL-IP     EXTERNAL-IP    OS-IMAGE                       KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-20-35-61.eu-central-1.compute.internal    Ready    node     28s    v1.14.1   172.20.35.61    54.93.81.252   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-49-149.eu-central-1.compute.internal   Ready    node     6s     v1.14.1   172.20.49.149   3.123.17.30    Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-59-6.eu-central-1.compute.internal     Ready    node     8s     v1.14.1   172.20.59.6     52.59.208.74   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-60-67.eu-central-1.compute.internal    Ready    master   118s   v1.14.1   172.20.60.67    54.93.245.21   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
 ```
 
 ```bash
