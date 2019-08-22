@@ -1,4 +1,4 @@
-# Install application using Flux
+# Install basic application using Flux
 
 ## cert-manager
 
@@ -173,45 +173,9 @@ Output:
 ```json
 ```
 
-## Harbor
 
-```bash
-envsubst < files/flux-repository/namespaces/harbor-ns.yaml      > tmp/k8s-flux-repository/namespaces/harbor-ns.yaml
-envsubst < files/flux-repository/releases/harbor-release.yaml   > tmp/k8s-flux-repository/releases/harbor-release.yaml
-envsubst < files/flux-repository/workloads/harbor-services.yaml > tmp/k8s-flux-repository/workloads/harbor-services.yaml
+Open these URLs to verify everything is working:
 
-git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Add harbor"
-git -C tmp/k8s-flux-repository push
-```
-
-```bash
-fluxctl sync
-```
-
-## GitLab
-
-```bash
-envsubst < files/flux-repository/namespaces/gitlab-ns.yaml                          > tmp/k8s-flux-repository/namespaces/gitlab-ns.yaml
-envsubst < files/flux-repository/releases/gitlab-release.yaml                       > tmp/k8s-flux-repository/releases/gitlab-release.yaml
-envsubst < files/flux-repository/workloads/gitlab-custom-ca.yaml                    > tmp/k8s-flux-repository/workloads/gitlab-custom-ca.yaml
-envsubst < files/flux-repository/workloads/gitlab-gitlab-initial-root-password.yaml > tmp/k8s-flux-repository/workloads/gitlab-gitlab-initial-root-password.yaml
-envsubst < files/flux-repository/workloads/gitlab-services.yaml                     > tmp/k8s-flux-repository/workloads/gitlab-services.yaml
-
-git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Add GitLab"
-git -C tmp/k8s-flux-repository push
-```
-
-```bash
-fluxctl sync
-```
-
-Try to open these URLs:
-
-* [https://harbor.mylabs.dev](https://harbor.mylabs.dev), [http://harbor.mylabs.dev](http://harbor.mylabs.dev)
-* [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev), [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
-* `ssh://gitlab.mylabs.dev`
 * [https://grafana.mylabs.dev](https://grafana.mylabs.dev), [http://grafana.mylabs.dev](http://grafana.mylabs.dev)
 * [https://jaeger.mylabs.dev](https://jaeger.mylabs.dev), [http://jaeger.mylabs.dev](http://jaeger.mylabs.dev)
 * [https://kiali.mylabs.dev](https://kiali.mylabs.dev), [http://kiali.mylabs.dev](http://kiali.mylabs.dev)
