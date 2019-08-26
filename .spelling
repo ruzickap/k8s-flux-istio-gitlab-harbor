@@ -2,15 +2,16 @@ awscli
 Cleanup
 CronJobs
 DaemonSets
-external-dns
 fluxcli
 GitLab
 Istio
 k8s
 kops
+kuard
 kubectl
 kubed
 Kubernetes
+loadbalancer
 nameservers
 podinfo
 ssh

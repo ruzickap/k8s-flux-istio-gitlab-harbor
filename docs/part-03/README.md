@@ -26,7 +26,7 @@ add 'workloads/cert-manager-00-crds.yaml'
 ```
 
 ```bash
-sleep 15
+sleep 20
 fluxctl sync
 ```
 
@@ -181,7 +181,7 @@ envsubst < files/flux-repository/namespaces/istio-ns.yaml         > tmp/k8s-flux
 envsubst < files/flux-repository/releases/istio-init-release.yaml > tmp/k8s-flux-repository/releases/istio-init-release.yaml
 
 git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Add istio-init"
+git -C tmp/k8s-flux-repository commit -m "Add Istio init"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 sleep 10
@@ -208,9 +208,10 @@ envsubst < files/flux-repository/workloads/istio-gateway.yaml  > tmp/k8s-flux-re
 envsubst < files/flux-repository/workloads/istio-services.yaml > tmp/k8s-flux-repository/workloads/istio-services.yaml
 
 git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Add istio"
+git -C tmp/k8s-flux-repository commit -m "Add Istio"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
+sleep 200
 ```
 
 Output:
@@ -230,68 +231,42 @@ Waiting for 8ea8110 to be applied ...
 Done.
 ```
 
-## external-dns
-
-Install [external-dns](https://github.com/kubernetes-incubator/external-dns) and
-let it manage `mylabs.dev` entries in Route 53:
+Create DNS record `mylabs.dev` for the loadbalancer created by Istio:
 
 ```bash
-helm install --name external-dns --namespace external-dns --version 2.5.1 stable/external-dns \
-  --set aws.credentials.accessKey="${ROUTE53_AWS_ACCESS_KEY_ID}" \
-  --set aws.credentials.secretKey="${ROUTE53_AWS_SECRET_ACCESS_KEY}" \
-  --set aws.region=eu-central-1 \
-  --set domainFilters={${MY_DOMAIN}} \
-  --set istioIngressGateways={istio-system/istio-ingressgateway} \
-  --set policy="sync" \
-  --set rbac.create=true \
-  --set sources="{istio-gateway,service}" \
-  --set txtOwnerId="${USER}-k8s.${MY_DOMAIN}"
+export LOADBALANCER_HOSTNAME=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+export CANONICAL_HOSTED_ZONE_NAME_ID=$(aws elb describe-load-balancers --query "LoadBalancerDescriptions[?DNSName==\`$LOADBALANCER_HOSTNAME\`].CanonicalHostedZoneNameID" --output text)
+export HOSTED_ZONE_ID=$(aws route53 list-hosted-zones --query "HostedZones[?Name==\`${MY_DOMAIN}.\`].Id" --output text)
+
+envsubst < files/aws_route53-dns_change.json | aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch=file:///dev/stdin
 ```
 
-Output:
+Install Harbor:
 
-```text
-NAME:   external-dns
-LAST DEPLOYED: Thu Aug 22 11:07:49 2019
-NAMESPACE: external-dns
-STATUS: DEPLOYED
+```bash
+envsubst < files/flux-repository/namespaces/harbor-ns.yaml      > tmp/k8s-flux-repository/namespaces/harbor-ns.yaml
+envsubst < files/flux-repository/releases/harbor-release.yaml   > tmp/k8s-flux-repository/releases/harbor-release.yaml
+envsubst < files/flux-repository/workloads/harbor-services.yaml > tmp/k8s-flux-repository/workloads/harbor-services.yaml
 
-RESOURCES:
-==> v1/Deployment
-NAME          READY  UP-TO-DATE  AVAILABLE  AGE
-external-dns  0/1    1           0          0s
+git -C tmp/k8s-flux-repository add --verbose .
+git -C tmp/k8s-flux-repository commit -m "Add Harbor"
+git -C tmp/k8s-flux-repository push -q
+fluxctl sync
+```
 
-==> v1/Pod(related)
-NAME                          READY  STATUS             RESTARTS  AGE
-external-dns-ddd67cbc4-xdhbc  0/1    ContainerCreating  0         0s
+Clone [kuard](https://github.com/kubernetes-up-and-running/kuard):
 
-==> v1/Secret
-NAME          TYPE    DATA  AGE
-external-dns  Opaque  1     0s
+```bash
+git -C tmp clone https://github.com/kubernetes-up-and-running/kuard
+```
 
-==> v1/Service
-NAME          TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)   AGE
-external-dns  ClusterIP  100.70.204.246  <none>       7979/TCP  0s
+Build `kuard` container image and push it to
+`harbor.mylabs.dev/library/kuard:v1`:
 
-==> v1/ServiceAccount
-NAME          SECRETS  AGE
-external-dns  1        0s
-
-==> v1beta1/ClusterRole
-NAME          AGE
-external-dns  0s
-
-==> v1beta1/ClusterRoleBinding
-NAME          AGE
-external-dns  0s
-
-
-NOTES:
-** Please be patient while the chart is being deployed **
-
-To verify that external-dns has started, run:
-
-  kubectl --namespace=external-dns get pods -l "app.kubernetes.io/name=external-dns,app.kubernetes.io/instance=external-dns"
+```bash
+docker build --tag harbor.${MY_DOMAIN}/library/kuard:v1 tmp/kuard
+echo admin | docker login --username admin --password-stdin harbor.${MY_DOMAIN}
+docker push harbor.${MY_DOMAIN}/library/kuard:v1
 ```
 
 Open these URLs to verify everything is working:
@@ -300,3 +275,4 @@ Open these URLs to verify everything is working:
 * [https://jaeger.mylabs.dev](https://jaeger.mylabs.dev), [http://jaeger.mylabs.dev](http://jaeger.mylabs.dev)
 * [https://kiali.mylabs.dev](https://kiali.mylabs.dev), [http://kiali.mylabs.dev](http://kiali.mylabs.dev)
 * [https://prometheus.mylabs.dev](https://prometheus.mylabs.dev), [http://prometheus.mylabs.dev](http://prometheus.mylabs.dev)
+* [https://harbor.mylabs.dev](https://harbor.mylabs.dev), [http://harbor.mylabs.dev](http://harbor.mylabs.dev)

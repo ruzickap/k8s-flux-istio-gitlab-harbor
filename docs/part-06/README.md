@@ -11,14 +11,6 @@ kops export kubecfg ${USER}-k8s.${MY_DOMAIN} --state=s3://${USER}-kops-k8s --kub
 export KUBECONFIG=/tmp/kubeconfig.conf
 ```
 
-Remove DNS records:
-
-```bash
-kubectl delete gateways.networking.istio.io --all --all-namespaces
-kubectl delete pod -n external-dns --all
-sleep 10
-```
-
 Remove K8s cluster:
 
 ```bash

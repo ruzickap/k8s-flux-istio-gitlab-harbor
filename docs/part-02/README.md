@@ -173,6 +173,8 @@ helm install --name flux --namespace flux --wait --version 0.12.0 fluxcd/flux \
   --set git.user="Flux" \
   --set helmOperator.create=true \
   --set helmOperator.createCRD=false \
+  --set registry.insecureHosts="harbor.${MY_DOMAIN}" \
+  --set registry.pollInterval="1m" \
   --set syncGarbageCollection.enabled=true
 ```
 
