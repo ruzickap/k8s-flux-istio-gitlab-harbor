@@ -9,9 +9,9 @@ spec:
   releaseName: istio
   targetNamespace: istio-system
   chart:
-    repository: https://storage.googleapis.com/istio-release/releases/1.2.3/charts/
+    repository: https://storage.googleapis.com/istio-release/releases/1.2.5/charts/
     name: istio
-    version: 1.2.3
+    version: 1.2.5
   values:
     gateways:
       istio-ingressgateway:
