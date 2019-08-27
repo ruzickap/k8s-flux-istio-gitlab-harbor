@@ -55,6 +55,14 @@ Cleanup + Remove Helm:
 rm -rf /home/${USER}/.helm
 ```
 
+Docker clean-up:
+
+```bash
+test -d ~/.docker/ && rm -rf ~/.docker/
+DOCKER_IMAGES=$(docker images -q)
+[ -n "${DOCKER_IMAGES}" ] && docker rmi --force ${DOCKER_IMAGES}
+```
+
 Remove `tmp` directory:
 
 ```bash
