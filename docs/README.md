@@ -19,4 +19,6 @@
 
 * [Part 01 - Create "kops" cluster in AWS](part-01/README.md)
 * [Part 02 - Install Helm + Flux](part-02/README.md)
-* [Part 03 - Install cert-manager, kubed, Istio, Harbor, GitLab using Flux](part-03/README.md)
+* [Part 03 - Install cert-manager, kubed, Istio, Harbor using Flux](part-03/README.md)
+* [Part 04 - Flux operations with container images (podinfo, kuard)](part-04/README.md)
+* [Part 05 - Flux operations with Helm Charts (podinfo)](part-05/README.md)

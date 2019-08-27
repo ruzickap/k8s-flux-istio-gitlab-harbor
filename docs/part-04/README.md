@@ -75,7 +75,7 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add podinfo"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-sleep 20
+sleep 40
 ```
 
 Output:
@@ -93,7 +93,7 @@ Done.
 
 ```bash
 curl http://podinfo.mylabs.dev
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser http://podinfo.mylabs.dev & fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://podinfo.mylabs.dev & sleep 1; fi
 ```
 
 Output:
@@ -223,7 +223,7 @@ WORKLOAD                    CONTAINER  IMAGE                       RELEASE  POLI
 default:deployment/podinfo  podinfo    stefanprodan/podinfo:2.1.3  ready    automated
 ```
 
-## Rolling back a Workload
+## Rolling back a workload
 
 ```bash
 fluxctl deautomate --workload=default:deployment/podinfo
@@ -252,7 +252,7 @@ Commit applied: a0f8e97
 ```
 
 ```bash
-fluxctl list-images --workload=default:deployment/podinfo
+fluxctl list-images --workload=default:deployment/podinfo 2>/dev/null
 ```
 
 Output:
@@ -324,6 +324,10 @@ Commit applied: af27a35
 ## Automated container image installation
 
 ```bash
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://harbor.mylabs.dev & sleep 1; fi
+```
+
+```bash
 envsubst << EOF > tmp/k8s-flux-repository/workloads/kuard.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -392,7 +396,6 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add kuard"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-sleep 15
 ```
 
 Output:
@@ -405,7 +408,7 @@ Done.
 ```
 
 ```bash
-fluxctl list-images --workload default:deployment/kuard 2>/dev/null
+COUNTER=0; while [ $COUNTER -lt 8 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
 ```
 
 Output:
@@ -417,7 +420,7 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
 ```
 
 ```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser http://kuard.mylabs.dev & fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & sleep 1; fi
 ```
 
 Change the version
@@ -433,11 +436,10 @@ image and push it to `harbor.mylabs.dev/library/kuard:v2`:
 docker build --tag harbor.${MY_DOMAIN}/library/kuard:v2 tmp/kuard
 echo admin | docker login --username admin --password-stdin harbor.${MY_DOMAIN}
 docker push harbor.${MY_DOMAIN}/library/kuard:v2
-sleep 60
 ```
 
 ```bash
-fluxctl list-images --workload default:deployment/kuard 2>/dev/null
+COUNTER=0; while [ $COUNTER -lt 12 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
 ```
 
 Output:
@@ -449,40 +451,87 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                          v1                           23 Aug 19 12:50 UTC
 ```
 
-## Remove the kuard application
+## Remove the podinfo application
 
-Check the git repository:
-
-```bash
-git -C tmp/k8s-flux-repository pull -q
-git -C tmp/k8s-flux-repository show
-```
-
-Let's remove the kuard application:
+See the running pods:
 
 ```bash
-rm tmp/k8s-flux-repository/workloads/kuard.yaml
-```
-
-Remove kuard:
-
-```bash
-git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Remove kuard"
-git -C tmp/k8s-flux-repository push -q
-fluxctl sync
-```
-
-Check the pods - Flux should remove the `kuard` pod:
-
-```bash
-kubectl get pods
+kubectl get virtualservice,service,deployment,pods
 ```
 
 Output:
 
 ```text
-NAME                       READY   STATUS        RESTARTS   AGE
-kuard-5b8478d4-ngj4c       0/1     Terminating   0          65s
-podinfo-5f4bf4fd57-qsm9j   1/1     Running       0          4m27s
+```
+
+Check the git repository:
+
+```bash
+date
+git -C tmp/k8s-flux-repository pull -q
+git -C tmp/k8s-flux-repository show
+```
+
+Let's remove the `podinfo` application:
+
+```bash
+rm tmp/k8s-flux-repository/workloads/podinfo.yaml
+git -C tmp/k8s-flux-repository add --verbose .
+git -C tmp/k8s-flux-repository commit -m "Remove podinfo"
+git -C tmp/k8s-flux-repository push -q
+fluxctl sync
+```
+
+Check the pods - Flux should remove the `podinfo` pod:
+
+```bash
+kubectl get virtualservice,service,deployment,pods
+```
+
+Output:
+
+```text
+```
+
+Try to remove also `kuard` application using kubectl:
+
+```bash
+kubectl delete deployment --selector app=kuard
+```
+
+Output:
+
+```bash
+```
+
+The deployment was terminated:
+
+```bash
+kubectl get deployment,pods
+sleep 20
+```
+
+Output:
+
+```text
+```
+
+Deployment was automatically provisioned back by Flux:
+
+```bash
+kubectl get deployment,pods
+```
+
+Output:
+
+```text
+```
+
+Remove `kuard` the proper way using Git commit:
+
+```bash
+rm tmp/k8s-flux-repository/workloads/kuard.yaml
+git -C tmp/k8s-flux-repository add --verbose .
+git -C tmp/k8s-flux-repository commit -m "Remove kuard"
+git -C tmp/k8s-flux-repository push -q
 ```
