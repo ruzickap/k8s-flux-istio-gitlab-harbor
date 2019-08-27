@@ -174,7 +174,7 @@ helm install --name flux --namespace flux --wait --version 0.12.0 fluxcd/flux \
   --set helmOperator.create=true \
   --set helmOperator.createCRD=false \
   --set registry.insecureHosts="harbor.${MY_DOMAIN}" \
-  --set registry.pollInterval="1m" \
+  --set registry.pollInterval="10s" \
   --set syncGarbageCollection.enabled=true
 ```
 
