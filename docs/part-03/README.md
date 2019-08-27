@@ -26,7 +26,7 @@ add 'workloads/cert-manager-00-crds.yaml'
 ```
 
 ```bash
-sleep 20
+sleep 30
 fluxctl sync
 ```
 
@@ -267,6 +267,14 @@ Build `kuard` container image and push it to
 docker build --tag harbor.${MY_DOMAIN}/library/kuard:v1 tmp/kuard
 echo admin | docker login --username admin --password-stdin harbor.${MY_DOMAIN}
 docker push harbor.${MY_DOMAIN}/library/kuard:v1
+```
+
+"Pre-build" the second docker image:
+
+```bash
+sed -i "s/ENV VERSION=test/ENV VERSION=new_version/" tmp/kuard/Dockerfile
+docker build --tag delete_me tmp/kuard
+sed -i "s/ENV VERSION=new_version/ENV VERSION=test/" tmp/kuard/Dockerfile
 ```
 
 Open these URLs to verify everything is working:
