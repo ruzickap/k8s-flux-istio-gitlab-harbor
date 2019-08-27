@@ -53,7 +53,7 @@ DEMO_PROMPT="${GREEN}➜ ${CYAN}$ "
 
 [ ! -d .git ] && git clone --quiet https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor && cd k8s-flux-istio-gitlab-harbor
 
-sed -n '/^```bash$/,/^```$/p;/^-----$/p' docs/part-04/README.md \
+sed -n '/^```bash$/,/^```$/p;/^-----$/p' docs/part-0{4,5}/README.md \
 | \
 sed \
   -e 's/^-----$/\
