@@ -279,10 +279,15 @@ Check the Helm Charts:
 helm ls
 ```
 
+Output:
+
+```text
+```
+
 Let's remove the podinfo Helm chart:
 
 ```bash
-rm tmp/k8s-flux-repository/releases/podinfo-release.yaml tmp/k8s-flux-repository/releases/podinfo-release.yaml
+rm tmp/k8s-flux-repository/releases/podinfo-release.yaml
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Remove podinfo Helm Chart"
 git -C tmp/k8s-flux-repository push -q
@@ -293,6 +298,11 @@ Check the Helm Charts:
 
 ```bash
 helm ls
+```
+
+Output:
+
+```text
 ```
 
 ## GitLab upgrade
@@ -315,10 +325,14 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase GitLab Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-sleep 100
+sleep 200
 ```
 
-Check is all the GitLab pods are running:
+```bash
+COUNTER=0; while [ $COUNTER -lt 20 ] ; do COUNTER=$((COUNTER+1)); kubectl get pods -n gitlab ; sleep 10; done
+```
+
+Verify if all the GitLab pods are running:
 
 ```bash
 kubectl get pods -n gitlab
@@ -326,7 +340,6 @@ kubectl get pods -n gitlab
 
 Then verify the GitLab version again (should be `12.2.1`).
 
-::: tip
-The GitLab pages are cached so please open "new anonymous window" in your
-browser to check the version again.
-:::
+```bash
+helm ls
+```

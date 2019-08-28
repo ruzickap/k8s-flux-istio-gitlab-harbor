@@ -321,6 +321,15 @@ Commit pushed:  af27a35
 Commit applied: af27a35
 ```
 
+```bash
+fluxctl list-images --workload=default:deployment/podinfo 2>/dev/null
+```
+
+Output:
+
+```text
+```
+
 ## Automated container image installation
 
 ```bash
