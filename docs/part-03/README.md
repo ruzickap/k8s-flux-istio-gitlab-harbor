@@ -130,6 +130,7 @@ spec:
       domains:
       - "*.${MY_DOMAIN}"
 EOF
+sleep 5
 ```
 
 Output:
