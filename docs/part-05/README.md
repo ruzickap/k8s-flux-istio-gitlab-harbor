@@ -1,6 +1,6 @@
 # Flux Helm Chart operations
 
-Demo of the HelmRelease operations and Flux
+Demo of the HelmRelease operations and Flux.
 
 ## Install GitLab using flux
 
@@ -42,8 +42,7 @@ spec:
   values:
     service:
       enabled: true
-    color: green
-    message: Hello from
+    message: Hello ;-)
 EOF
 
 envsubst << EOF > tmp/k8s-flux-repository/workloads/podinfo.yaml
@@ -76,6 +75,8 @@ fluxctl sync
 sleep 20
 ```
 
+List the installed Helm Charts:
+
 ```bash
 helm ls
 ```
@@ -88,6 +89,8 @@ NAME            REVISION        UPDATED                         STATUS          
 podinfo         1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1           2.1.1           default
 ```
 
+Show the history of `podinfo`:
+
 ```bash
 helm history podinfo
 ```
@@ -98,6 +101,8 @@ Output:
 REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
 1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1   Install complete
 ```
+
+Check the HelmRelease deatils for `podinfo`:
 
 ```bash
 kubectl describe helmreleases.flux.weave.works podinfo
@@ -156,6 +161,8 @@ Events:
   Normal  ChartSynced  2m55s (x13 over 33m)  helm-operator  Chart managed by HelmRelease processed
 ```
 
+List the running pods:
+
 ```bash
 kubectl get pods
 ```
@@ -167,6 +174,8 @@ NAME                       READY   STATUS    RESTARTS   AGE
 podinfo-7c9b8ddf75-xjpnw   1/1     Running   0          4m57s
 ```
 
+Get the pod's image version:
+
 ```bash
 kubectl describe pods | grep Image:
 ```
@@ -177,8 +186,10 @@ Output:
     Image:         stefanprodan/podinfo:2.1.1
 ```
 
+List the Flux workloads:
+
 ```bash
-fluxctl list-workloads -n default
+fluxctl list-workloads
 ```
 
 Output:
@@ -189,12 +200,17 @@ default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.1          read
 default:helmrelease/podinfo                                                 DEPLOYED
 ```
 
+List the images discovered by Flux:
+
 ```bash
-fluxctl list-images -n default 2>/dev/null
+fluxctl list-images 2>/dev/null
 ```
+
+Upgrade the `podinfo` Helm Chart to `2.1.3`:
 
 ```bash
 sed -i "s/version: 2.1.1/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo-release.yaml
+git diff tmp/k8s-flux-repository/releases/podinfo-release.yaml
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase podinfo Helm version"
 git -C tmp/k8s-flux-repository push -q
@@ -327,7 +343,7 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase GitLab Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-COUNTER=0; while [ $COUNTER -lt 20 ] ; do COUNTER=$((COUNTER+1)); kubectl get pods -n gitlab ; sleep 10; done
+COUNTER=0; while [ $COUNTER -lt 20 ] ; do COUNTER=$((COUNTER+1)); echo ; kubectl get pods -n gitlab ; sleep 10; done
 ```
 
 Verify if all the GitLab pods are running:

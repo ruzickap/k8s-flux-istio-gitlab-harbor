@@ -31,6 +31,12 @@ workloads/istio-gateway.yaml
 workloads/istio-services.yaml
 ```
 
+Check how the git repository looks like in GitHub:
+
+```bash
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/ & fi
+```
+
 Install [podinfo](https://github.com/stefanprodan/podinfo) application using
 Flux:
 
@@ -116,6 +122,8 @@ Waiting for 2328c1a to be applied ...
 Done.
 ```
 
+Start the web browser with [https://podinfo.mylabs.dev](https://podinfo.mylabs.dev):
+
 ```bash
 curl http://podinfo.mylabs.dev
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://podinfo.mylabs.dev & fi
@@ -180,12 +188,6 @@ default:deployment/podinfo  podinfo    stefanprodan/podinfo
                                            2.0.1             07 Aug 19 12:39 UTC
 ```
 
-Check how the git repository looks like in GitHub:
-
-```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/commits/master & fi
-```
-
 Update all images belongs to "podinfo deployment":
 
 ```bash
@@ -200,6 +202,18 @@ WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -> 2.1.3
 Commit pushed:  87989e5
 Commit applied: 87989e5
+```
+
+Check the git repository:
+
+```bash
+git -C tmp/k8s-flux-repository pull -q
+git -C tmp/k8s-flux-repository show
+```
+
+Output:
+
+```text
 ```
 
 Verify the updated version:
@@ -250,6 +264,18 @@ Commit pushed:  a0f8e97
 Commit applied: a0f8e97
 ```
 
+Check the git repository:
+
+```bash
+git -C tmp/k8s-flux-repository pull -q
+git -C tmp/k8s-flux-repository show
+```
+
+Output:
+
+```text
+```
+
 Verify the image version:
 
 ```bash
@@ -275,6 +301,8 @@ Set tag for the image:
 ```bash
 fluxctl policy --workload=default:deployment/podinfo --tag-all='2.0.*'
 ```
+
+Output:
 
 ```text
 WORKLOAD                    STATUS   UPDATES
@@ -326,6 +354,18 @@ WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -> 2.0.5
 Commit pushed:  af27a35
 Commit applied: af27a35
+```
+
+Check the git repository:
+
+```bash
+git -C tmp/k8s-flux-repository pull -q
+git -C tmp/k8s-flux-repository show
+```
+
+Output:
+
+```text
 ```
 
 Check the versions running in the workload:
@@ -419,7 +459,7 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add kuard"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-COUNTER=0; while [ $COUNTER -lt 10 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
+COUNTER=0; while [ $COUNTER -lt 12 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
 ```
 
 Output:
@@ -435,6 +475,8 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                      '-> v1                           23 Aug 19 12:50 UTC
 ```
 
+Open tha page: [https://kuard.mylabs.dev](https://kuard.mylabs.dev)
+
 ```bash
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & fi
 ```
@@ -443,6 +485,12 @@ Change the `VERSION` environment variable:
 
 ```bash
 sed -i "s/ENV VERSION=test/ENV VERSION=new_version/" tmp/kuard/Dockerfile
+git diff tmp/kuard/Dockerfile
+```
+
+Output:
+
+```text
 ```
 
 Build [kuard](https://github.com/kubernetes-up-and-running/kuard) container
@@ -465,6 +513,18 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                          v1                           23 Aug 19 12:50 UTC
 ```
 
+Check the git repository:
+
+```bash
+git -C tmp/k8s-flux-repository pull -q
+git -C tmp/k8s-flux-repository show
+```
+
+Output:
+
+```text
+```
+
 ## Remove the applications using git commit
 
 See the running pods:
@@ -476,14 +536,6 @@ kubectl get virtualservice,service,deployment,pods
 Output:
 
 ```text
-```
-
-Check the git repository:
-
-```bash
-date
-git -C tmp/k8s-flux-repository pull -q
-git -C tmp/k8s-flux-repository show
 ```
 
 Let's remove the `podinfo` and `kuard` application:
