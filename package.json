@@ -5,7 +5,14 @@
   "author": "Petr Ruzicka <petr.ruzicka@gmail.com>",
   "license": "Apache License 2.0",
   "homepage": "https://ruzickap.github.io/k8s-harbor",
-  "keywords": [ "harbor", "kubernetes", "demo", "presentation" ],
+  "keywords": [
+    "gitlab",
+    "flux",
+    "harbor",
+    "kubernetes",
+    "demo",
+    "presentation"
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
