@@ -1,8 +1,10 @@
 # Flux Helm Chart operations
 
+Demo of the HelmRelease operations and Flux
+
 ## Install GitLab using flux
 
-* Install GitLab
+Install GitLab
 
 ```bash
 envsubst < files/flux-repository/namespaces/gitlab-ns.yaml                          > tmp/k8s-flux-repository/namespaces/gitlab-ns.yaml
@@ -36,7 +38,7 @@ spec:
   chart:
     repository: https://stefanprodan.github.io/podinfo
     name: podinfo
-    version: 2.1.2
+    version: 2.1.1
   values:
     service:
       enabled: true
@@ -68,7 +70,7 @@ Push the changes to the Git repository:
 
 ```bash
 git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Add Podinfo HelmRelease"
+git -C tmp/k8s-flux-repository commit -m "Add podinfo HelmRelease"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 sleep 20
@@ -83,7 +85,7 @@ Output:
 ```text
 NAME            REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
 ...
-podinfo         1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.2           2.1.2           default
+podinfo         1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1           2.1.1           default
 ```
 
 ```bash
@@ -94,7 +96,7 @@ Output:
 
 ```text
 REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
-1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.2   Install complete
+1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1   Install complete
 ```
 
 ```bash
@@ -123,7 +125,7 @@ Spec:
   Chart:
     Name:            podinfo
     Repository:      https://stefanprodan.github.io/podinfo
-    Version:         2.1.2
+    Version:         2.1.1
   Release Name:      podinfo
   Target Namespace:  default
   Values:
@@ -139,14 +141,14 @@ Status:
     Type:                  Released
     Last Transition Time:  2019-08-26T17:26:04Z
     Last Update Time:      2019-08-26T17:56:53Z
-    Message:               chart fetched: podinfo-2.1.2.tgz
+    Message:               chart fetched: podinfo-2.1.1.tgz
     Reason:                RepoChartInCache
     Status:                True
     Type:                  ChartFetched
   Observed Generation:     2
   Release Name:            podinfo
   Release Status:          DEPLOYED
-  Revision:                2.1.2
+  Revision:                2.1.1
   Values Checksum:         e5cbd0fbdaec53c94a85d00d87df06fd9a4140d603ff68418422de5dcbd7c849
 Events:
   Type    Reason       Age                   From           Message
@@ -172,7 +174,7 @@ kubectl describe pods | grep Image:
 Output:
 
 ```text
-    Image:         stefanprodan/podinfo:2.1.2
+    Image:         stefanprodan/podinfo:2.1.1
 ```
 
 ```bash
@@ -183,7 +185,7 @@ Output:
 
 ```text
 WORKLOAD                     CONTAINER  IMAGE                               RELEASE   POLICY
-default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.2          ready
+default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.1          ready
 default:helmrelease/podinfo                                                 DEPLOYED
 ```
 
@@ -192,7 +194,7 @@ fluxctl list-images -n default 2>/dev/null
 ```
 
 ```bash
-sed -i "s/version: 2.1.2/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo-release.yaml
+sed -i "s/version: 2.1.1/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo-release.yaml
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase podinfo Helm version"
 git -C tmp/k8s-flux-repository push -q
@@ -209,8 +211,8 @@ Output:
 
 ```text
 REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
-1               Mon Aug 26 19:26:04 2019        SUPERSEDED      podinfo-2.1.2   Install complete
-2               Mon Aug 26 19:44:54 2019        SUPERSEDED      podinfo-2.1.2   Upgrade complete
+1               Mon Aug 26 19:26:04 2019        SUPERSEDED      podinfo-2.1.1   Install complete
+2               Mon Aug 26 19:44:54 2019        SUPERSEDED      podinfo-2.1.1   Upgrade complete
 3               Mon Aug 26 20:23:56 2019        DEPLOYED        podinfo-2.1.3   Upgrade complete
 ```
 
@@ -325,10 +327,6 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase GitLab Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-sleep 200
-```
-
-```bash
 COUNTER=0; while [ $COUNTER -lt 20 ] ; do COUNTER=$((COUNTER+1)); kubectl get pods -n gitlab ; sleep 10; done
 ```
 

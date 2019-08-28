@@ -25,6 +25,8 @@ add 'workloads/cert-manager-00-crds.yaml'
  create mode 100644 workloads/cert-manager-00-crds.yaml
 ```
 
+Let Flux to sync the configuration from git repository:
+
 ```bash
 sleep 30
 fluxctl sync
@@ -38,6 +40,8 @@ Revision of master to apply is 90f78a1
 Waiting for 90f78a1 to be applied ...
 Done.
 ```
+
+Create `ClusterIssuer`:
 
 ```bash
 export ROUTE53_AWS_SECRET_ACCESS_KEY_BASE64=$(echo -n "$ROUTE53_AWS_SECRET_ACCESS_KEY" | base64)
@@ -136,6 +140,8 @@ certificate.certmanager.k8s.io/ingress-cert-staging created
 
 ## kubed
 
+Install [kubed](https://github.com/appscode/kubed):
+
 ```bash
 envsubst < files/flux-repository/namespaces/kubed-ns.yaml    > tmp/k8s-flux-repository/namespaces/kubed-ns.yaml
 envsubst < files/flux-repository/releases/kubed-release.yaml > tmp/k8s-flux-repository/releases/kubed-release.yaml
@@ -176,6 +182,8 @@ secret/ingress-cert-staging annotated
 
 ## Istio
 
+Install [Istio](https://istio.io/) by installing the `istio-init`:
+
 ```bash
 envsubst < files/flux-repository/namespaces/istio-ns.yaml         > tmp/k8s-flux-repository/namespaces/istio-ns.yaml
 envsubst < files/flux-repository/releases/istio-init-release.yaml > tmp/k8s-flux-repository/releases/istio-init-release.yaml
@@ -201,6 +209,8 @@ Revision of master to apply is a86b69c
 Waiting for a86b69c to be applied ...
 Done.
 ```
+
+Install [Istio](https://istio.io/):
 
 ```bash
 envsubst < files/flux-repository/releases/istio-release.yaml   > tmp/k8s-flux-repository/releases/istio-release.yaml
@@ -241,6 +251,8 @@ export HOSTED_ZONE_ID=$(aws route53 list-hosted-zones --query "HostedZones[?Name
 envsubst < files/aws_route53-dns_change.json | aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch=file:///dev/stdin
 ```
 
+## Harbor
+
 Install Harbor:
 
 ```bash
@@ -253,6 +265,8 @@ git -C tmp/k8s-flux-repository commit -m "Add Harbor"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
+
+## Prepare docker images
 
 Clone [kuard](https://github.com/kubernetes-up-and-running/kuard):
 

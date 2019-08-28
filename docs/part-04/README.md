@@ -6,6 +6,31 @@ Set the namespace (`flux`) where flux was installed for running `fluxctl`:
 export FLUX_FORWARD_NAMESPACE=flux
 ```
 
+Examine git Flux repository:
+
+```bash
+git -C tmp/k8s-flux-repository ls
+```
+
+Output:
+
+```text
+README.md
+namespaces/cert-manager-ns.yaml
+namespaces/harbor-ns.yaml
+namespaces/istio-ns.yaml
+namespaces/kubed-ns.yaml
+releases/cert-manager-release.yaml
+releases/harbor-release.yaml
+releases/istio-init-release.yaml
+releases/istio-release.yaml
+releases/kubed-release.yaml
+workloads/cert-manager-00-crds.yaml
+workloads/harbor-services.yaml
+workloads/istio-gateway.yaml
+workloads/istio-services.yaml
+```
+
 Install [podinfo](https://github.com/stefanprodan/podinfo) application using
 Flux:
 
@@ -155,8 +180,16 @@ default:deployment/podinfo  podinfo    stefanprodan/podinfo
                                            2.0.1             07 Aug 19 12:39 UTC
 ```
 
+Check how the git repository looks like in GitHub:
+
 ```bash
-fluxctl release --workload=default:deployment/podinfo --user=pruzicka --message="New version" --update-all-images
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/commits/master & fi
+```
+
+Update all images belongs to "podinfo deployment":
+
+```bash
+fluxctl release --workload=default:deployment/podinfo --user=pruzicka --message="Update all podinfo images" --update-all-images
 ```
 
 Output:
@@ -168,6 +201,8 @@ default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -> 2.1.
 Commit pushed:  87989e5
 Commit applied: 87989e5
 ```
+
+Verify the updated version:
 
 ```bash
 fluxctl list-images --workload default:deployment/podinfo 2>/dev/null
@@ -185,6 +220,8 @@ default:deployment/podinfo  podinfo    stefanprodan/podinfo
 ...
 ```
 
+Correct image version should be also visible directly from the pod:
+
 ```bash
 kubectl describe pods | grep Image:
 ```
@@ -195,47 +232,9 @@ Output:
     Image:          stefanprodan/podinfo:2.1.3
 ```
 
-## Turning on Automation
-
-```bash
-fluxctl automate --workload=default:deployment/podinfo
-```
-
-Output:
-
-```text
-WORKLOAD                    STATUS   UPDATES
-default:deployment/podinfo  success
-Commit pushed:  99dd0ba
-```
-
-Flux will now automatically deploy a new version of a workload whenever one is
-available and commit the new configuration to the version control system.
-
-```bash
-fluxctl list-workloads
-```
-
-Output:
-
-```text
-WORKLOAD                    CONTAINER  IMAGE                       RELEASE  POLICY
-default:deployment/podinfo  podinfo    stefanprodan/podinfo:2.1.3  ready    automated
-```
-
 ## Rolling back a workload
 
-```bash
-fluxctl deautomate --workload=default:deployment/podinfo
-```
-
-Output:
-
-```text
-WORKLOAD                    STATUS   UPDATES
-default:deployment/podinfo  success
-Commit pushed:  806a45b
-```
+Roll back the `podinfo` image to previous version (2.1.2)
 
 ```bash
 fluxctl release --workload=default:deployment/podinfo --update-image=stefanprodan/podinfo:2.1.2
@@ -250,6 +249,8 @@ default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.3 -> 2.1.
 Commit pushed:  a0f8e97
 Commit applied: a0f8e97
 ```
+
+Verify the image version:
 
 ```bash
 fluxctl list-images --workload=default:deployment/podinfo 2>/dev/null
@@ -269,6 +270,8 @@ default:deployment/podinfo  podinfo    stefanprodan/podinfo
 
 ## Image Tag Filtering
 
+Set tag for the image:
+
 ```bash
 fluxctl policy --workload=default:deployment/podinfo --tag-all='2.0.*'
 ```
@@ -278,6 +281,8 @@ WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success
 Commit pushed:  38d94be
 ```
+
+See what was pushed to git repository:
 
 ```bash
 git -C tmp/k8s-flux-repository pull -q
@@ -307,6 +312,8 @@ spec:
   selector:
 ```
 
+Instruct Flux to update all images for `podinfo`:
+
 ```bash
 fluxctl release --workload=default:deployment/podinfo --update-all-images
 ```
@@ -321,6 +328,8 @@ Commit pushed:  af27a35
 Commit applied: af27a35
 ```
 
+Check the versions running in the workload:
+
 ```bash
 fluxctl list-images --workload=default:deployment/podinfo 2>/dev/null
 ```
@@ -332,9 +341,14 @@ Output:
 
 ## Automated container image installation
 
+Open the Harbor container repository: [https://harbor.mylabs.dev](https://harbor.mylabs.dev)
+
 ```bash
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://harbor.mylabs.dev & fi
 ```
+
+Create [https://github.com/kubernetes-up-and-running/kuard](https://github.com/kubernetes-up-and-running/kuard)
+application "manifest":
 
 ```bash
 envsubst << EOF > tmp/k8s-flux-repository/workloads/kuard.yaml
@@ -405,6 +419,7 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add kuard"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
+COUNTER=0; while [ $COUNTER -lt 10 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
 ```
 
 Output:
@@ -414,15 +429,7 @@ Synchronizing with git@github.com:ruzickap/k8s-flux-repository
 Revision of master to apply is 55c3ba2
 Waiting for 55c3ba2 to be applied ...
 Done.
-```
 
-```bash
-COUNTER=0; while [ $COUNTER -lt 8 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
-```
-
-Output:
-
-```text
 WORKLOAD                  CONTAINER  IMAGE                            CREATED
 default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                      '-> v1                           23 Aug 19 12:50 UTC
@@ -432,7 +439,7 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & fi
 ```
 
-Change the version
+Change the `VERSION` environment variable:
 
 ```bash
 sed -i "s/ENV VERSION=test/ENV VERSION=new_version/" tmp/kuard/Dockerfile
@@ -445,15 +452,13 @@ image and push it to `harbor.mylabs.dev/library/kuard:v2`:
 docker build --tag harbor.${MY_DOMAIN}/library/kuard:v2 tmp/kuard
 echo admin | docker login --username admin --password-stdin harbor.${MY_DOMAIN}
 docker push harbor.${MY_DOMAIN}/library/kuard:v2
-```
-
-```bash
 COUNTER=0; while [ $COUNTER -lt 12 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-images --workload default:deployment/kuard 2>/dev/null; sleep 5; done
 ```
 
 Output:
 
 ```text
+...
 WORKLOAD                  CONTAINER  IMAGE                            CREATED
 default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                      '-> v2                           23 Aug 19 13:08 UTC
