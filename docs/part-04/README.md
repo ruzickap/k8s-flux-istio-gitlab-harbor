@@ -93,7 +93,7 @@ Done.
 
 ```bash
 curl http://podinfo.mylabs.dev
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://podinfo.mylabs.dev & sleep 1; fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://podinfo.mylabs.dev & fi
 ```
 
 Output:
@@ -324,7 +324,7 @@ Commit applied: af27a35
 ## Automated container image installation
 
 ```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://harbor.mylabs.dev & sleep 1; fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://harbor.mylabs.dev & fi
 ```
 
 ```bash
@@ -420,7 +420,7 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
 ```
 
 ```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & sleep 1; fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & fi
 ```
 
 Change the version
@@ -451,7 +451,7 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                          v1                           23 Aug 19 12:50 UTC
 ```
 
-## Remove the podinfo application
+## Remove the applications using git commit
 
 See the running pods:
 
@@ -472,12 +472,12 @@ git -C tmp/k8s-flux-repository pull -q
 git -C tmp/k8s-flux-repository show
 ```
 
-Let's remove the `podinfo` application:
+Let's remove the `podinfo` and `kuard` application:
 
 ```bash
-rm tmp/k8s-flux-repository/workloads/podinfo.yaml
+rm tmp/k8s-flux-repository/workloads/podinfo.yaml tmp/k8s-flux-repository/workloads/kuard.yaml
 git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Remove podinfo"
+git -C tmp/k8s-flux-repository commit -m "Remove podinfo and kuard"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
@@ -491,47 +491,4 @@ kubectl get virtualservice,service,deployment,pods
 Output:
 
 ```text
-```
-
-Try to remove also `kuard` application using kubectl:
-
-```bash
-kubectl delete deployment --selector app=kuard
-```
-
-Output:
-
-```bash
-```
-
-The deployment was terminated:
-
-```bash
-kubectl get deployment,pods
-sleep 20
-```
-
-Output:
-
-```text
-```
-
-Deployment was automatically provisioned back by Flux:
-
-```bash
-kubectl get deployment,pods
-```
-
-Output:
-
-```text
-```
-
-Remove `kuard` the proper way using Git commit:
-
-```bash
-rm tmp/k8s-flux-repository/workloads/kuard.yaml
-git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Remove kuard"
-git -C tmp/k8s-flux-repository push -q
 ```
