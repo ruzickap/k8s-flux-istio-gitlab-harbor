@@ -17,26 +17,12 @@ git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 
-Try to open these URLs:
-
-* [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev), [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
-* `ssh://gitlab.mylabs.dev`
-
-```bash
-helm list
-```
-
-Output:
-
-```bash
-```
-
 ## Run and application via Flux "HelmRelease"
 
 Create `HelmRelease` and `VirtualService` files:
 
 ```bash
-envsubst << EOF > tmp/k8s-flux-repository/releases/podinfo.yaml
+envsubst << EOF > tmp/k8s-flux-repository/releases/podinfo-release.yaml
 apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
@@ -85,6 +71,7 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Add Podinfo HelmRelease"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
+sleep 20
 ```
 
 ```bash
@@ -205,9 +192,9 @@ fluxctl list-images -n default 2>/dev/null
 ```
 
 ```bash
-sed -i "s/version: 2.1.2/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo.yaml
+sed -i "s/version: 2.1.2/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo-release.yaml
 git -C tmp/k8s-flux-repository add --verbose .
-git -C tmp/k8s-flux-repository commit -m "Increase podinfo helm version"
+git -C tmp/k8s-flux-repository commit -m "Increase podinfo Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
@@ -285,3 +272,60 @@ Events:
   ----    ------       ----                  ----           -------
   Normal  ChartSynced  2m13s (x26 over 68m)  helm-operator  Chart managed by HelmRelease processed
 ```
+
+Check the Helm Charts:
+
+```
+helm ls
+```
+
+Let's remove the podinfo Helm chart:
+
+```bash
+rm tmp/k8s-flux-repository/releases/podinfo-release.yaml tmp/k8s-flux-repository/releases/podinfo-release.yaml
+git -C tmp/k8s-flux-repository add --verbose .
+git -C tmp/k8s-flux-repository commit -m "Remove podinfo Helm Chart"
+git -C tmp/k8s-flux-repository push -q
+fluxctl sync
+```
+
+Check the Helm Charts:
+
+```
+helm ls
+```
+
+## GitLab upgrade
+
+Open the GitLab URL ( `root` / `admin123` ) and check the version (`12.2.0`) in the "Admin" area:
+
+* [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev), [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
+* `ssh://gitlab.mylabs.dev`
+
+```bash
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://gitlab.mylabs.dev & fi
+```
+
+Upgrade GitLab to version `12.2.1`:
+
+```bash
+sed -i "s/version: 2.2.0/version: 2.2.1/" tmp/k8s-flux-repository/releases/gitlab-release.yaml
+git -C tmp/k8s-flux-repository add --verbose .
+git -C tmp/k8s-flux-repository commit -m "Increase GitLab Helm version"
+git -C tmp/k8s-flux-repository push -q
+fluxctl sync
+sleep 100
+```
+
+Check is all the GitLab pods are running:
+
+```bash
+kubectl get pods -n gitlab
+```
+
+Then verify the GitLab version again (should be `12.2.1`).
+
+::: tip
+The GitLab pages are cached so please open "new anonymous window" in your
+browser to check the version again.
+:::
