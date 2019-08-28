@@ -182,7 +182,7 @@ kops create cluster \
   --name=${USER}-k8s.${MY_DOMAIN} \
   --state=s3://${USER}-kops-k8s \
   --zones=eu-central-1a \
-  --node-count=3 \
+  --node-count=4 \
   --node-size=t3.large \
   --node-volume-size=10 \
   --master-count=1 \
