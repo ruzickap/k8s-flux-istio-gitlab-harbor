@@ -275,7 +275,7 @@ Events:
 
 Check the Helm Charts:
 
-```
+```bash
 helm ls
 ```
 
@@ -291,13 +291,14 @@ fluxctl sync
 
 Check the Helm Charts:
 
-```
+```bash
 helm ls
 ```
 
 ## GitLab upgrade
 
-Open the GitLab URL ( `root` / `admin123` ) and check the version (`12.2.0`) in the "Admin" area:
+Open the GitLab URL ( `root` / `admin123` ) and check the version (`12.2.0`)
+in the "Admin" area:
 
 * [https://gitlab.mylabs.dev](https://gitlab.mylabs.dev), [http://gitlab.mylabs.dev](http://gitlab.mylabs.dev)
 * `ssh://gitlab.mylabs.dev`
