@@ -13,6 +13,8 @@ spec:
       protocol: HTTP
     hosts:
     - harbor.${MY_DOMAIN}
+    tls:
+      httpsRedirect: true
   - port:
       number: 443
       name: https-harbor
