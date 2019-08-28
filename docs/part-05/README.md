@@ -102,7 +102,7 @@ REVISION        UPDATED                         STATUS          CHART           
 1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1   Install complete
 ```
 
-Check the HelmRelease deatils for `podinfo`:
+Check the HelmRelease details for `podinfo`:
 
 ```bash
 kubectl describe helmreleases.flux.weave.works podinfo

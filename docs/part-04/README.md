@@ -475,7 +475,7 @@ default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
                                      '-> v1                           23 Aug 19 12:50 UTC
 ```
 
-Open tha page: [https://kuard.mylabs.dev](https://kuard.mylabs.dev)
+Open the page: [https://kuard.mylabs.dev](https://kuard.mylabs.dev)
 
 ```bash
 if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & fi
