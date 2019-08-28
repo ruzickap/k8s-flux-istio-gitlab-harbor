@@ -15,13 +15,13 @@ test -s ./demo-magic.sh || curl --silent https://raw.githubusercontent.com/paxto
 #
 # speed at which to simulate typing. bigger num = faster
 #
-TYPE_SPEED=600
+TYPE_SPEED=60
 
 # Uncomment to run non-interactively
 export PROMPT_TIMEOUT=0
 
 # No wait
-export NO_WAIT=true
+export NO_WAIT=false
 
 #
 # custom prompt
@@ -64,6 +64,7 @@ wait\
   -e 's/^```bash.*/\
 pe '"'"'/' \
   -e 's/^```$/'"'"'/' \
+  -e 's/^sleep /#sleep /' \
 > README.sh
 
 
