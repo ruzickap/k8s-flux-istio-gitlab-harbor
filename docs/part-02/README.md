@@ -1,5 +1,10 @@
 # Install Helm + Flux
 
+Flux Architecture:
+
+![Flux Architecture](https://github.com/fluxcd/flux/raw/18e5174581f44ed8c9a881dd5071179eed1ebf4d/docs/_files/flux-cd-diagram.png
+ "Flux Architecture")
+
 Create git repository which will be used by Flux in GitHub:
 
 ```bash
@@ -260,4 +265,5 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyGvcJPcFxvsc9SHtJiOt7G6pvNQgmcf+PIIfy6PoE
 Add the ssh key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"
 -> "Settings" -> "Deploy keys" -> "Add new" -> "Allow write access"
 
------
+![Flux logo](https://raw.githubusercontent.com/fluxcd/flux/18e5174581f44ed8c9a881dd5071179eed1ebf4d/docs/_files/flux.svg?sanitize=true
+"Flux logo")
