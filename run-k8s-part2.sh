@@ -82,7 +82,7 @@ if [ "$#" -eq 0 ]; then
   export EKS_CERT_MANAGER_ROUTE53_AWS_ACCESS_KEY_ID=$(awk -F\" "/AccessKeyId/ { print \$4 }" $HOME/.aws/${USER}-eks-cert-manager-route53-${MY_DOMAIN})
   export EKS_CERT_MANAGER_ROUTE53_AWS_SECRET_ACCESS_KEY=$(awk -F\" "/SecretAccessKey/ { print \$4 }" $HOME/.aws/${USER}-eks-cert-manager-route53-${MY_DOMAIN})
   kops export kubecfg ${USER}-k8s.${MY_DOMAIN} --state=s3://${USER}-kops-k8s --kubeconfig kubeconfig.conf
-  echo -e "\n*** ${MY_DOMAIN} | ${LETSENCRYPT_ENVIRONMENT} | ${EKS_CERT_MANAGER_ROUTE53_AWS_ACCESS_KEY_ID} | ${EKS_CERT_MANAGER_ROUTE53_AWS_SECRET_ACCESS_KEY} |\n`kubectl --kubeconfig=./kubeconfig.conf cluster-info`"
+  echo -e "\n*** ${MY_DOMAIN} | ${LETSENCRYPT_ENVIRONMENT} | ${EKS_CERT_MANAGER_ROUTE53_AWS_ACCESS_KEY_ID} | ${EKS_CERT_MANAGER_ROUTE53_AWS_SECRET_ACCESS_KEY} ***\n`kubectl --kubeconfig=./kubeconfig.conf cluster-info`"
 
   if [ -z ${EKS_CERT_MANAGER_ROUTE53_AWS_ACCESS_KEY_ID} ] || [ -z ${EKS_CERT_MANAGER_ROUTE53_AWS_SECRET_ACCESS_KEY} ]; then
     echo -e "\n*** One of the mandatory variables 'EKS_CERT_MANAGER_ROUTE53_AWS_ACCESS_KEY_ID' or 'EKS_CERT_MANAGER_ROUTE53_AWS_SECRET_ACCESS_KEY' is not set !!\n";

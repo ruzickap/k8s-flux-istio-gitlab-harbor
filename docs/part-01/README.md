@@ -101,14 +101,14 @@ Output:
 {
   "Policy": {
     "PolicyName": "pruzicka-AmazonRoute53Domains-cert-manager",
-    "PolicyId": "ANPA36ZNO4Q4LMUBSQ4TD",
+    "PolicyId": "ANPA36ZNO4Q4CRKTWCFKO",
     "Arn": "arn:aws:iam::822044714040:policy/pruzicka-AmazonRoute53Domains-cert-manager",
     "Path": "/",
     "DefaultVersionId": "v1",
     "AttachmentCount": 0,
     "IsAttachable": true,
-    "CreateDate": "2019-08-22T08:51:57Z",
-    "UpdateDate": "2019-08-22T08:51:57Z"
+    "CreateDate": "2019-08-29T07:32:23Z",
+    "UpdateDate": "2019-08-29T07:32:23Z"
   }
 }
 ```
@@ -132,9 +132,9 @@ Output:
   "User": {
     "Path": "/",
     "UserName": "pruzicka-route53",
-    "UserId": "AIDA36ZNO4Q4FHIAJAJCR",
+    "UserId": "AIDA36ZNO4Q4BBTGNN42U",
     "Arn": "arn:aws:iam::822044714040:user/pruzicka-route53",
-    "CreateDate": "2019-08-22T08:51:59Z"
+    "CreateDate": "2019-08-29T07:32:25Z"
   }
 }
 ```
@@ -197,6 +197,15 @@ kops create cluster \
 Output:
 
 ```text
+...
+I0829 09:32:53.961790    4154 dns.go:153] Pre-creating DNS records
+I0829 09:32:55.037438    4154 update_cluster.go:291] Exporting kubecfg for cluster
+kops has set your kubectl context to pruzicka-k8s.mylabs.dev
+
+Cluster changes have been applied to the cloud.
+
+
+Changes may require instances to restart: kops rolling-update cluster
 ```
 
 Wait for cluster to be up and running:
@@ -229,11 +238,12 @@ kubectl get nodes -o wide
 Output:
 
 ```text
-NAME                                             STATUS   ROLES    AGE    VERSION   INTERNAL-IP     EXTERNAL-IP    OS-IMAGE                       KERNEL-VERSION   CONTAINER-RUNTIME
-ip-172-20-35-61.eu-central-1.compute.internal    Ready    node     28s    v1.14.1   172.20.35.61    54.93.81.252   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
-ip-172-20-49-149.eu-central-1.compute.internal   Ready    node     6s     v1.14.1   172.20.49.149   3.123.17.30    Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
-ip-172-20-59-6.eu-central-1.compute.internal     Ready    node     8s     v1.14.1   172.20.59.6     52.59.208.74   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
-ip-172-20-60-67.eu-central-1.compute.internal    Ready    master   118s   v1.14.1   172.20.60.67    54.93.245.21   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+NAME                                             STATUS   ROLES    AGE   VERSION   INTERNAL-IP     EXTERNAL-IP     OS-IMAGE                       KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-20-51-30.eu-central-1.compute.internal    Ready    node     25s   v1.14.6   172.20.51.30    18.197.69.215   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-56-172.eu-central-1.compute.internal   Ready    node     27s   v1.14.6   172.20.56.172   18.194.44.246   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-57-146.eu-central-1.compute.internal   Ready    node     24s   v1.14.6   172.20.57.146   18.185.188.31   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-58-112.eu-central-1.compute.internal   Ready    master   72s   v1.14.6   172.20.58.112   18.194.242.59   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
+ip-172-20-58-28.eu-central-1.compute.internal    Ready    node     16s   v1.14.6   172.20.58.28    3.120.175.151   Debian GNU/Linux 9 (stretch)   4.9.0-9-amd64    docker://18.6.3
 ```
 
 ```bash

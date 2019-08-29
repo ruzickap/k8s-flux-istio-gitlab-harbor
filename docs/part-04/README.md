@@ -6,6 +6,12 @@ Set the namespace (`flux`) where flux was installed for running `fluxctl`:
 export FLUX_FORWARD_NAMESPACE=flux
 ```
 
+Check how the git repository looks like in GitHub:
+
+```bash
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/ & fi
+```
+
 Examine git Flux repository:
 
 ```bash
@@ -31,17 +37,12 @@ workloads/istio-gateway.yaml
 workloads/istio-services.yaml
 ```
 
-Check how the git repository looks like in GitHub:
-
-```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ruzickap/k8s-flux-repository/ & fi
-```
-
 Install [podinfo](https://github.com/stefanprodan/podinfo) application using
 Flux:
 
 ```bash
 envsubst << EOF > tmp/k8s-flux-repository/workloads/podinfo.yaml
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -113,12 +114,12 @@ Output:
 
 ```text
 add 'workloads/podinfo.yaml'
-[master 2328c1a] Add podinfo
- 1 file changed, 72 insertions(+)
+[master 9c58afd] Add podinfo
+ 1 file changed, 54 insertions(+)
  create mode 100644 workloads/podinfo.yaml
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is 2328c1a
-Waiting for 2328c1a to be applied ...
+Revision of master to apply is 9c58afd
+Waiting for 9c58afd to be applied ...
 Done.
 ```
 
@@ -126,14 +127,15 @@ Start the web browser with [https://podinfo.mylabs.dev](https://podinfo.mylabs.d
 
 ```bash
 curl http://podinfo.mylabs.dev
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://podinfo.mylabs.dev & fi
+echo
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser --incognito https://podinfo.mylabs.dev & fi
 ```
 
 Output:
 
 ```json
 {
-  "hostname": "podinfo-56c6447655-mc7kp",
+  "hostname": "podinfo-56c6447655-7pwld",
   "version": "2.1.2",
   "revision": "ab74d6ef0bd3c5f39090134f59b12837757e80b8",
   "color": "blue",
@@ -200,8 +202,8 @@ Output:
 Submitting release ...
 WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -> 2.1.3
-Commit pushed:  87989e5
-Commit applied: 87989e5
+Commit pushed:  f5587fe
+Commit applied: f5587fe
 ```
 
 Check the git repository:
@@ -214,6 +216,29 @@ git -C tmp/k8s-flux-repository show
 Output:
 
 ```text
+commit f5587fe7887e294b88da88490a17eed61e69b012 (HEAD -> master, tag: flux-sync, origin/master)
+Author: Flux <petr.ruzicka@gmail.com>
+Date:   Thu Aug 29 08:07:13 2019 +0000
+
+    Update all podinfo images
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:1 @
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+@ workloads/podinfo.yaml:19 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: "stefanprodan/podinfo:2.1.2"
+        image: "stefanprodan/podinfo:2.1.3"
+        ports:
+        - containerPort: 9898
+---
 ```
 
 Verify the updated version:
@@ -260,8 +285,8 @@ Output:
 Submitting release ...
 WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.3 -> 2.1.2
-Commit pushed:  a0f8e97
-Commit applied: a0f8e97
+Commit pushed:  55c8ed1
+Commit applied: 55c8ed1
 ```
 
 Check the git repository:
@@ -274,6 +299,24 @@ git -C tmp/k8s-flux-repository show
 Output:
 
 ```text
+commit 55c8ed19b9558e87cf1811f1c9bc0fef576b2e7e (HEAD -> master, origin/master)
+Author: Flux <petr.ruzicka@gmail.com>
+Date:   Thu Aug 29 08:08:59 2019 +0000
+
+    Release stefanprodan/podinfo:2.1.2 to default:deployment/podinfo
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:19 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: "stefanprodan/podinfo:2.1.3"
+        image: "stefanprodan/podinfo:2.1.2"
+        ports:
+        - containerPort: 9898
+---
 ```
 
 Verify the image version:
@@ -307,7 +350,7 @@ Output:
 ```text
 WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success
-Commit pushed:  38d94be
+Commit pushed:  3744220
 ```
 
 See what was pushed to git repository:
@@ -320,15 +363,15 @@ git -C tmp/k8s-flux-repository show
 Output:
 
 ```text
-commit 38d94be23eec28b9477b799f100d393a806c9085 (HEAD -> master, tag: flux-sync, origin/master)
+commit 3744220888d3937b358fb6fc1a88ddf99dbea59a (HEAD -> master, origin/master)
 Author: Flux <petr.ruzicka@gmail.com>
-Date:   Thu Aug 22 12:45:03 2019 +0000
+Date:   Thu Aug 29 08:10:24 2019 +0000
 
     Updated policies: default:deployment/podinfo
 
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────────────────────────────────────────
 modified: workloads/podinfo.yaml
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────────────────────────────────────────
 @ workloads/podinfo.yaml:7 @ kind: Deployment
 metadata:
   name: podinfo
@@ -352,8 +395,8 @@ Output:
 Submitting release ...
 WORKLOAD                    STATUS   UPDATES
 default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -> 2.0.5
-Commit pushed:  af27a35
-Commit applied: af27a35
+Commit pushed:  dd0af19
+Commit applied: dd0af19
 ```
 
 Check the git repository:
@@ -366,6 +409,24 @@ git -C tmp/k8s-flux-repository show
 Output:
 
 ```text
+commit dd0af19b22b0db8c9e448cae5248a23800d52803 (HEAD -> master, origin/master)
+Author: Flux <petr.ruzicka@gmail.com>
+Date:   Thu Aug 29 08:10:58 2019 +0000
+
+    Release all latest to default:deployment/podinfo
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:21 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: "stefanprodan/podinfo:2.1.2"
+        image: "stefanprodan/podinfo:2.0.5"
+        ports:
+        - containerPort: 9898
+---
 ```
 
 Check the versions running in the workload:
@@ -377,6 +438,16 @@ fluxctl list-images --workload=default:deployment/podinfo 2>/dev/null
 Output:
 
 ```text
+WORKLOAD                    CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo  podinfo    stefanprodan/podinfo
+                                       |   2.1.3             13 Aug 19 09:33 UTC
+                                       |   latest            13 Aug 19 09:33 UTC
+                                       |   2.1.2             13 Aug 19 07:53 UTC
+                                       |   2.1.1             13 Aug 19 07:51 UTC
+                                       |   2.1.0             07 Aug 19 13:18 UTC
+                                       '-> 2.0.5             07 Aug 19 12:50 UTC
+                                           2.0.4             07 Aug 19 12:48 UTC
+...
 ```
 
 ## Automated container image installation
@@ -392,6 +463,7 @@ application "manifest":
 
 ```bash
 envsubst << EOF > tmp/k8s-flux-repository/workloads/kuard.yaml
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -465,32 +537,53 @@ COUNTER=0; while [ $COUNTER -lt 12 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-i
 Output:
 
 ```text
+add 'workloads/kuard.yaml'
+[master d792a6f] Add kuard
+ 1 file changed, 56 insertions(+)
+ create mode 100644 workloads/kuard.yaml
 Synchronizing with git@github.com:ruzickap/k8s-flux-repository
-Revision of master to apply is 55c3ba2
-Waiting for 55c3ba2 to be applied ...
+Revision of master to apply is d792a6f
+Waiting for d792a6f to be applied ...
 Done.
-
+...
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard  image data not available
+                                     '-> v1                           ?
+...
 WORKLOAD                  CONTAINER  IMAGE                            CREATED
 default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
-                                     '-> v1                           23 Aug 19 12:50 UTC
+                                     '-> v1                           29 Aug 19 07:47 UTC
+...
 ```
 
 Open the page: [https://kuard.mylabs.dev](https://kuard.mylabs.dev)
 
 ```bash
-if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://kuard.mylabs.dev & fi
+if [ -x /usr/bin/chromium-browser ]; then chromium-browser --incognito https://kuard.mylabs.dev & fi
 ```
 
 Change the `VERSION` environment variable:
 
 ```bash
 sed -i "s/ENV VERSION=test/ENV VERSION=new_version/" tmp/kuard/Dockerfile
-git diff tmp/kuard/Dockerfile
+git -C tmp/kuard/ diff Dockerfile
 ```
 
 Output:
 
 ```text
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: Dockerfile
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ Dockerfile:19 @ COPY . .
+ENV VERBOSE=0
+ENV PKG=github.com/kubernetes-up-and-running/kuard
+ENV ARCH=amd64
+ENV VERSION=test
+ENV VERSION=new_version
+
+# Do the build. Script is part of incoming sources.
+RUN build/build.sh
 ```
 
 Build [kuard](https://github.com/kubernetes-up-and-running/kuard) container
@@ -506,11 +599,44 @@ COUNTER=0; while [ $COUNTER -lt 12 ] ; do COUNTER=$((COUNTER+1)); fluxctl list-i
 Output:
 
 ```text
+Sending build context to Docker daemon  3.378MB
+Step 1/14 : FROM golang:1.12-alpine AS build
+ ---> e0d646523991
+...
+Step 14/14 : CMD [ "/kuard" ]
+ ---> Using cache
+ ---> 652d18a08b2d
+Successfully built 652d18a08b2d
+Successfully tagged harbor.mylabs.dev/library/kuard:v2
+WARNING! Your password will be stored unencrypted in /home/pruzicka/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+The push refers to repository [harbor.mylabs.dev/library/kuard]
+4af36e68af9b: Pushed
+03901b4a2ea8: Layer already exists
+v2: digest: sha256:14e584451dfd99dcd34e67226701786b952a8c5be11ba6091e64d690364bc646 size: 739
 ...
 WORKLOAD                  CONTAINER  IMAGE                            CREATED
 default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
-                                     '-> v2                           23 Aug 19 13:08 UTC
-                                         v1                           23 Aug 19 12:50 UTC
+                                     '-> v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-> v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-> v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-> v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     '-> v2                           29 Aug 19 07:49 UTC
+                                         v1                           29 Aug 19 07:47 UTC
 ```
 
 Check the git repository:
@@ -523,6 +649,29 @@ git -C tmp/k8s-flux-repository show
 Output:
 
 ```text
+commit c8e39248374934a8f9b4f184deb689eedb8f8cb4 (HEAD -> master, origin/master)
+Author: Flux <petr.ruzicka@gmail.com>
+Date:   Thu Aug 29 08:21:43 2019 +0000
+
+    Auto-release harbor.mylabs.dev/library/kuard:v2
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/kuard.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/kuard.yaml:1 @
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+@ workloads/kuard.yaml:21 @ spec:
+    spec:
+      containers:
+      - name: kuard
+        image: "harbor.mylabs.dev/library/kuard:v1"
+        image: "harbor.mylabs.dev/library/kuard:v2"
+        ports:
+        - containerPort: 8080
+---
 ```
 
 ## Remove the applications using git commit
@@ -536,6 +685,22 @@ kubectl get virtualservice,service,deployment,pods
 Output:
 
 ```text
+NAME                                                              GATEWAYS                                         HOSTS                  AGE
+virtualservice.networking.istio.io/kuard-http-virtual-service     [istio-system/istio-autogenerated-k8s-ingress]   [kuard.mylabs.dev]     14m
+virtualservice.networking.istio.io/podinfo-http-virtual-service   [istio-system/istio-autogenerated-k8s-ingress]   [podinfo.mylabs.dev]   29m
+
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/kuard-service     ClusterIP   100.70.120.183   <none>        8080/TCP   14m
+service/kubernetes        ClusterIP   100.64.0.1       <none>        443/TCP    55m
+service/podinfo-service   ClusterIP   100.70.190.65    <none>        9898/TCP   29m
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/kuard     1/1     1            1           14m
+deployment.extensions/podinfo   1/1     1            1           29m
+
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/kuard-5b8478d4-nksgf       1/1     Running   0          10m
+pod/podinfo-5f4bf4fd57-clsmm   1/1     Running   0          21m
 ```
 
 Let's remove the `podinfo` and `kuard` application:
@@ -548,6 +713,21 @@ git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 
+Output:
+
+```text
+remove 'workloads/kuard.yaml'
+remove 'workloads/podinfo.yaml'
+[master 594fe1e] Remove podinfo and kuard
+ 2 files changed, 114 deletions(-)
+ delete mode 100644 workloads/kuard.yaml
+ delete mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 594fe1e
+Waiting for 594fe1e to be applied ...
+Done.
+```
+
 Check the pods - Flux should remove the `podinfo` pod:
 
 ```bash
@@ -557,4 +737,6 @@ kubectl get virtualservice,service,deployment,pods
 Output:
 
 ```text
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   100.64.0.1   <none>        443/TCP   57m
 ```

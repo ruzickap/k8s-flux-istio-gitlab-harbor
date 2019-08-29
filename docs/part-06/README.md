@@ -17,21 +17,35 @@ Remove K8s cluster:
 kops delete cluster --name=${USER}-k8s.${MY_DOMAIN} --yes --state=s3://${USER}-kops-k8s
 ```
 
+Output:
+
+```text
+security-group:sg-06d46ba965803d316     ok
+subnet:subnet-07ed5c1e194433a0f ok
+route-table:rtb-01b1001514d69cfa4       ok
+vpc:vpc-0c76a222e55c511ed       ok
+dhcp-options:dopt-08ce550770088824c     ok
+Deleted kubectl config for pruzicka-k8s.mylabs.dev
+
+Deleted cluster: "pruzicka-k8s.mylabs.dev"
+```
+
 Delete GitHub repository:
 
 ```bash
 hub delete -y ruzickap/k8s-flux-repository
 ```
 
+Output:
+
+```text
+Deleted repository 'ruzickap/k8s-flux-repository'.
+```
+
 Remove S3 bucket used for storing the configuration by kops:
 
 ```bash
 aws s3api delete-bucket --bucket ${USER}-kops-k8s --region eu-central-1
-```
-
-Output:
-
-```text
 ```
 
 Clean Policy, User, Access Key in AWS:

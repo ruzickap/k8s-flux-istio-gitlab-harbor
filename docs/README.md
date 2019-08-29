@@ -22,3 +22,10 @@
 * [Part 03 - Install cert-manager, kubed, Istio, Harbor using Flux](part-03/README.md)
 * [Part 04 - Flux operations with container images (podinfo, kuard)](part-04/README.md)
 * [Part 05 - Flux operations with Helm Charts (podinfo)](part-05/README.md)
+
+## Links
+
+* [https://github.com/justinbarrick/fluxcloud](https://github.com/justinbarrick/fluxcloud)
+* [https://github.com/stefanprodan/gitops-istio](https://github.com/stefanprodan/gitops-istio)
+* [https://github.com/stefanprodan/openfaas-flux](https://github.com/stefanprodan/openfaas-flux)
+* [https://github.com/fluxcd/helm-operator-get-started](https://github.com/fluxcd/helm-operator-get-started)

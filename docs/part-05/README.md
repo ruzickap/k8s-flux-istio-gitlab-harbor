@@ -19,6 +19,27 @@ git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 
+Output:
+
+```text
+add 'namespaces/gitlab-ns.yaml'
+add 'releases/gitlab-release.yaml'
+add 'workloads/gitlab-custom-ca.yaml'
+add 'workloads/gitlab-gitlab-initial-root-password.yaml'
+add 'workloads/gitlab-services.yaml'
+[master 691c4f2] Add GitLab
+ 5 files changed, 193 insertions(+)
+ create mode 100644 namespaces/gitlab-ns.yaml
+ create mode 100644 releases/gitlab-release.yaml
+ create mode 100644 workloads/gitlab-custom-ca.yaml
+ create mode 100644 workloads/gitlab-gitlab-initial-root-password.yaml
+ create mode 100644 workloads/gitlab-services.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 691c4f2
+Waiting for 691c4f2 to be applied ...
+Done.
+```
+
 ## Run and application via Flux "HelmRelease"
 
 Create `HelmRelease` and `VirtualService` files:
@@ -75,6 +96,21 @@ fluxctl sync
 sleep 20
 ```
 
+Output:
+
+```text
+add 'releases/podinfo-release.yaml'
+add 'workloads/podinfo.yaml'
+[master 03164b6] Add podinfo HelmRelease
+ 2 files changed, 34 insertions(+)
+ create mode 100644 releases/podinfo-release.yaml
+ create mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 03164b6
+Waiting for 03164b6 to be applied ...
+Done.
+```
+
 List the installed Helm Charts:
 
 ```bash
@@ -84,9 +120,15 @@ helm ls
 Output:
 
 ```text
-NAME            REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
-...
-podinfo         1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1           2.1.1           default
+NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+podinfo         1               Thu Aug 29 10:35:53 2019        DEPLOYED        podinfo-2.1.1        2.1.1           default
 ```
 
 Show the history of `podinfo`:
@@ -99,7 +141,7 @@ Output:
 
 ```text
 REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
-1               Mon Aug 26 19:26:04 2019        DEPLOYED        podinfo-2.1.1   Install complete
+1               Thu Aug 29 10:35:53 2019        DEPLOYED        podinfo-2.1.1   Install complete
 ```
 
 Check the HelmRelease details for `podinfo`:
@@ -115,17 +157,17 @@ Name:         podinfo
 Namespace:    default
 Labels:       flux.weave.works/sync-gc-mark=sha256.grAYAKjn3uQ_4t8EXwcBCfJndY8XeUwdNz_dOeTJTcs
 Annotations:  flux.weave.works/automated: false
-              flux.weave.works/sync-checksum: d8863913a7ae9a9f8901f7622285dda7c47fdcc7
+              flux.weave.works/sync-checksum: 59cb325964b3d10ff647d8426eccf14f8592f437
               kubectl.kubernetes.io/last-applied-configuration:
                 {"apiVersion":"flux.weave.works/v1beta1","kind":"HelmRelease","metadata":{"annotations":{"flux.weave.works/automated":"false","flux.weave....
 API Version:  flux.weave.works/v1beta1
 Kind:         HelmRelease
 Metadata:
-  Creation Timestamp:  2019-08-26T17:26:04Z
-  Generation:          2
-  Resource Version:    18628
+  Creation Timestamp:  2019-08-29T08:35:53Z
+  Generation:          1
+  Resource Version:    10677
   Self Link:           /apis/flux.weave.works/v1beta1/namespaces/default/helmreleases/podinfo
-  UID:                 94ff3e40-c826-11e9-88de-025b937076da
+  UID:                 036d2df0-ca38-11e9-8542-026128d6be42
 Spec:
   Chart:
     Name:            podinfo
@@ -134,31 +176,32 @@ Spec:
   Release Name:      podinfo
   Target Namespace:  default
   Values:
-    Color:              green
-    Service . Enabled:  true
+    Message:  Hello ;-)
+    Service:
+      Enabled:  true
 Status:
   Conditions:
-    Last Transition Time:  2019-08-26T17:26:05Z
-    Last Update Time:      2019-08-26T17:44:54Z
-    Message:               helm upgrade succeeded
+    Last Transition Time:  2019-08-29T08:35:54Z
+    Last Update Time:      2019-08-29T08:35:54Z
+    Message:               helm install succeeded
     Reason:                HelmSuccess
     Status:                True
     Type:                  Released
-    Last Transition Time:  2019-08-26T17:26:04Z
-    Last Update Time:      2019-08-26T17:56:53Z
+    Last Transition Time:  2019-08-29T08:35:53Z
+    Last Update Time:      2019-08-29T08:36:28Z
     Message:               chart fetched: podinfo-2.1.1.tgz
     Reason:                RepoChartInCache
     Status:                True
     Type:                  ChartFetched
-  Observed Generation:     2
+  Observed Generation:     1
   Release Name:            podinfo
   Release Status:          DEPLOYED
   Revision:                2.1.1
-  Values Checksum:         e5cbd0fbdaec53c94a85d00d87df06fd9a4140d603ff68418422de5dcbd7c849
+  Values Checksum:         d16a2a7c9df4d3b7e98f4dd15ba8f9a83b4d05305f3830567d9372e6f088097e
 Events:
-  Type    Reason       Age                   From           Message
-  ----    ------       ----                  ----           -------
-  Normal  ChartSynced  2m55s (x13 over 33m)  helm-operator  Chart managed by HelmRelease processed
+  Type    Reason       Age                From           Message
+  ----    ------       ----               ----           -------
+  Normal  ChartSynced  29s (x2 over 63s)  helm-operator  Chart managed by HelmRelease processed
 ```
 
 List the running pods:
@@ -171,7 +214,7 @@ Output:
 
 ```text
 NAME                       READY   STATUS    RESTARTS   AGE
-podinfo-7c9b8ddf75-xjpnw   1/1     Running   0          4m57s
+podinfo-85d47bf859-bt6h6   1/1     Running   0          71s
 ```
 
 Get the pod's image version:
@@ -195,26 +238,52 @@ fluxctl list-workloads
 Output:
 
 ```text
-WORKLOAD                     CONTAINER  IMAGE                               RELEASE   POLICY
-default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.1          ready
-default:helmrelease/podinfo                                                 DEPLOYED
+WORKLOAD                     CONTAINER  IMAGE                       RELEASE   POLICY
+default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.1  ready
+default:helmrelease/podinfo                                         DEPLOYED
 ```
 
 List the images discovered by Flux:
 
 ```bash
-fluxctl list-images 2>/dev/null
+fluxctl list-images -n default 2>/dev/null
+```
+
+Output:
+
+```text
+WORKLOAD                     CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo   podinfo    stefanprodan/podinfo
+                                        |   2.1.3             13 Aug 19 09:33 UTC
+                                        |   latest            13 Aug 19 09:33 UTC
+                                        |   2.1.2             13 Aug 19 07:53 UTC
+                                        '-> 2.1.1             13 Aug 19 07:51 UTC
+                                            2.1.0             07 Aug 19 13:18 UTC
+...
+default:helmrelease/podinfo
 ```
 
 Upgrade the `podinfo` Helm Chart to `2.1.3`:
 
 ```bash
 sed -i "s/version: 2.1.1/version: 2.1.3/" tmp/k8s-flux-repository/releases/podinfo-release.yaml
-git diff tmp/k8s-flux-repository/releases/podinfo-release.yaml
+git -C tmp/k8s-flux-repository diff releases/podinfo-release.yaml
 git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase podinfo Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
+```
+
+Output:
+
+```text
+add 'releases/podinfo-release.yaml'
+[master 954ab8e] Increase podinfo Helm version
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 954ab8e
+Waiting for 954ab8e to be applied ...
+Done.
 ```
 
 List the release history of `podinfo`:
@@ -227,9 +296,8 @@ Output:
 
 ```text
 REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
-1               Mon Aug 26 19:26:04 2019        SUPERSEDED      podinfo-2.1.1   Install complete
-2               Mon Aug 26 19:44:54 2019        SUPERSEDED      podinfo-2.1.1   Upgrade complete
-3               Mon Aug 26 20:23:56 2019        DEPLOYED        podinfo-2.1.3   Upgrade complete
+1               Thu Aug 29 10:35:53 2019        SUPERSEDED      podinfo-2.1.1   Install complete
+2               Thu Aug 29 10:39:39 2019        DEPLOYED        podinfo-2.1.3   Upgrade complete
 ```
 
 Check the `HelmRelease` details:
@@ -245,17 +313,17 @@ Name:         podinfo
 Namespace:    default
 Labels:       flux.weave.works/sync-gc-mark=sha256.grAYAKjn3uQ_4t8EXwcBCfJndY8XeUwdNz_dOeTJTcs
 Annotations:  flux.weave.works/automated: false
-              flux.weave.works/sync-checksum: e85bf3e0928c61c99dbdb32d8cd70a1f1c660ec7
+              flux.weave.works/sync-checksum: 67cb807881a41e240fb226cf33885f6e88a03168
               kubectl.kubernetes.io/last-applied-configuration:
                 {"apiVersion":"flux.weave.works/v1beta1","kind":"HelmRelease","metadata":{"annotations":{"flux.weave.works/automated":"false","flux.weave....
 API Version:  flux.weave.works/v1beta1
 Kind:         HelmRelease
 Metadata:
-  Creation Timestamp:  2019-08-26T17:26:04Z
-  Generation:          3
-  Resource Version:    23347
+  Creation Timestamp:  2019-08-29T08:35:53Z
+  Generation:          2
+  Resource Version:    11198
   Self Link:           /apis/flux.weave.works/v1beta1/namespaces/default/helmreleases/podinfo
-  UID:                 94ff3e40-c826-11e9-88de-025b937076da
+  UID:                 036d2df0-ca38-11e9-8542-026128d6be42
 Spec:
   Chart:
     Name:            podinfo
@@ -264,31 +332,32 @@ Spec:
   Release Name:      podinfo
   Target Namespace:  default
   Values:
-    Color:              green
-    Service . Enabled:  true
+    Message:  Hello ;-)
+    Service:
+      Enabled:  true
 Status:
   Conditions:
-    Last Transition Time:  2019-08-26T17:26:05Z
-    Last Update Time:      2019-08-26T18:23:57Z
-    Message:               helm upgrade succeeded
-    Reason:                HelmSuccess
-    Status:                True
-    Type:                  Released
-    Last Transition Time:  2019-08-26T17:26:04Z
-    Last Update Time:      2019-08-26T18:32:51Z
+    Last Transition Time:  2019-08-29T08:35:53Z
+    Last Update Time:      2019-08-29T08:39:38Z
     Message:               chart fetched: podinfo-2.1.3.tgz
     Reason:                RepoChartInCache
     Status:                True
     Type:                  ChartFetched
-  Observed Generation:     3
+    Last Transition Time:  2019-08-29T08:35:54Z
+    Last Update Time:      2019-08-29T08:39:39Z
+    Message:               helm upgrade succeeded
+    Reason:                HelmSuccess
+    Status:                True
+    Type:                  Released
+  Observed Generation:     2
   Release Name:            podinfo
   Release Status:          DEPLOYED
   Revision:                2.1.3
-  Values Checksum:         e5cbd0fbdaec53c94a85d00d87df06fd9a4140d603ff68418422de5dcbd7c849
+  Values Checksum:         d16a2a7c9df4d3b7e98f4dd15ba8f9a83b4d05305f3830567d9372e6f088097e
 Events:
-  Type    Reason       Age                   From           Message
-  ----    ------       ----                  ----           -------
-  Normal  ChartSynced  2m13s (x26 over 68m)  helm-operator  Chart managed by HelmRelease processed
+  Type    Reason       Age                  From           Message
+  ----    ------       ----                 ----           -------
+  Normal  ChartSynced  73s (x4 over 4m58s)  helm-operator  Chart managed by HelmRelease processed
 ```
 
 Check the Helm Charts:
@@ -300,6 +369,15 @@ helm ls
 Output:
 
 ```text
+NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+podinfo         2               Thu Aug 29 10:39:39 2019        DEPLOYED        podinfo-2.1.3        2.1.3           default
 ```
 
 Let's remove the podinfo Helm chart:
@@ -312,6 +390,19 @@ git -C tmp/k8s-flux-repository push -q
 fluxctl sync
 ```
 
+Output:
+
+```text
+remove 'releases/podinfo-release.yaml'
+[master bd15a3a] Remove podinfo Helm Chart
+ 1 file changed, 18 deletions(-)
+ delete mode 100644 releases/podinfo-release.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is bd15a3a
+Waiting for bd15a3a to be applied ...
+Done.
+```
+
 Check the Helm Charts:
 
 ```bash
@@ -321,6 +412,14 @@ helm ls
 Output:
 
 ```text
+NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
 ```
 
 ## GitLab upgrade
@@ -343,7 +442,39 @@ git -C tmp/k8s-flux-repository add --verbose .
 git -C tmp/k8s-flux-repository commit -m "Increase GitLab Helm version"
 git -C tmp/k8s-flux-repository push -q
 fluxctl sync
-COUNTER=0; while [ $COUNTER -lt 20 ] ; do COUNTER=$((COUNTER+1)); echo ; kubectl get pods -n gitlab ; sleep 10; done
+COUNTER=0; while [ $COUNTER -lt 25 ] ; do COUNTER=$((COUNTER+1)); echo ; kubectl get pods -n gitlab ; sleep 10; done
+```
+
+Output:
+
+```text
+add 'releases/gitlab-release.yaml'
+[master 581de58] Increase GitLab Helm version
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 581de58
+Waiting for 581de58 to be applied ...
+Done.
+...
+NAME                                       READY   STATUS            RESTARTS   AGE
+gitlab-gitaly-0                            1/1     Terminating       0          9m50s
+gitlab-gitlab-monitor-54c8678797-cknps     1/1     Running           0          9m51s
+gitlab-gitlab-monitor-7886dc78bb-dvpgr     0/1     PodInitializing   0          7s
+gitlab-gitlab-shell-7b56949489-vhn72       1/1     Running           0          9m51s
+gitlab-gitlab-shell-7b56949489-zlfsz       1/1     Running           0          9m34s
+gitlab-gitlab-shell-7d5875b7f8-lcvqb       0/1     PodInitializing   0          7s
+gitlab-migrations.2-8bbgg                  0/1     PodInitializing   0          7s
+gitlab-minio-5746f7f7c7-bckgb              1/1     Running           0          9m50s
+gitlab-minio-create-buckets.2-z8c9b        0/1     Completed         0          7s
+gitlab-postgresql-554d9fc6d5-fk627         2/2     Running           0          9m50s
+gitlab-redis-78549bd659-hwsjd              2/2     Running           0          9m50s
+gitlab-sidekiq-all-in-1-6f4947dc45-z9p9n   0/1     Init:1/3          0          7s
+gitlab-sidekiq-all-in-1-7bfc6b75-44wmv     1/1     Running           0          9m50s
+gitlab-task-runner-6dfd9d767-spdhf         1/1     Terminating       0          9m50s
+gitlab-unicorn-6d755544d6-s8g4s            0/2     Init:2/3          0          7s
+gitlab-unicorn-7d7c54b787-6cm8f            2/2     Running           0          9m34s
+gitlab-unicorn-7d7c54b787-r8fvv            2/2     Running           0          9m50s
+...
 ```
 
 Verify if all the GitLab pods are running:
@@ -352,8 +483,40 @@ Verify if all the GitLab pods are running:
 kubectl get pods -n gitlab
 ```
 
+Output:
+
+```text
+NAME                                       READY   STATUS      RESTARTS   AGE
+gitlab-gitaly-0                            1/1     Running     0          3m22s
+gitlab-gitlab-monitor-7886dc78bb-dvpgr     1/1     Running     0          3m59s
+gitlab-gitlab-shell-7d5875b7f8-lcvqb       1/1     Running     0          3m59s
+gitlab-gitlab-shell-7d5875b7f8-p4bw2       1/1     Running     0          3m32s
+gitlab-migrations.2-8bbgg                  0/1     Completed   0          3m59s
+gitlab-minio-5746f7f7c7-bckgb              1/1     Running     0          13m
+gitlab-minio-create-buckets.2-z8c9b        0/1     Completed   0          3m59s
+gitlab-postgresql-554d9fc6d5-fk627         2/2     Running     0          13m
+gitlab-redis-78549bd659-hwsjd              2/2     Running     0          13m
+gitlab-sidekiq-all-in-1-6f4947dc45-z9p9n   1/1     Running     0          3m59s
+gitlab-task-runner-6cd5894bf6-qhp8n        1/1     Running     0          3m21s
+gitlab-unicorn-6d755544d6-d7vqz            2/2     Running     0          2m31s
+gitlab-unicorn-6d755544d6-s8g4s            2/2     Running     0          3m59s
+```
+
 Then verify the GitLab version again (should be `12.2.1`).
 
 ```bash
 helm ls
+```
+
+Output:
+
+```text
+NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          2               Thu Aug 29 10:44:09 2019        DEPLOYED        gitlab-2.2.1         12.2.1          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
 ```

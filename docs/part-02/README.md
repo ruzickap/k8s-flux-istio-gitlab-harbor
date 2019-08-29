@@ -25,7 +25,7 @@ Output:
 
 ```text
 Cloning into 'k8s-flux-repository'...
-warning: You appear to have cloned an empty repository
+warning: You appear to have cloned an empty repository.
 ```
 
 Create initial flux repository structure and add it into the git repository:
@@ -46,15 +46,9 @@ Output:
 mkdir: created directory 'tmp/k8s-flux-repository/namespaces'
 mkdir: created directory 'tmp/k8s-flux-repository/releases'
 mkdir: created directory 'tmp/k8s-flux-repository/workloads'
-[master (root-commit) 6b7646c] Initial commit
+[master (root-commit) 01ec748] Initial commit
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
-Enumerating objects: 3, done.
-Counting objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 237 bytes | 237.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To github.com:ruzickap/k8s-flux-repository.git
- * [new branch]      master -> master
 ```
 
 ## Install Helm
@@ -127,7 +121,7 @@ Output:
 
 ```text
 NAME                             READY   STATUS    RESTARTS   AGE
-tiller-deploy-7b8b4499b5-hgpfm   1/1     Running   0          14s
+tiller-deploy-7b8b4499b5-cs6zf   1/1     Running   0          11s
 ```
 
 ## Install Flux
@@ -182,47 +176,47 @@ Output:
 
 ```text
 NAME:   flux
-LAST DEPLOYED: Thu Aug 22 10:12:20 2019
+LAST DEPLOYED: Thu Aug 29 09:39:10 2019
 NAMESPACE: flux
 STATUS: DEPLOYED
 
 RESOURCES:
 ==> v1/ConfigMap
 NAME              DATA  AGE
-flux-kube-config  1     42s
+flux-kube-config  1     16s
 
 ==> v1/Deployment
 NAME                READY  UP-TO-DATE  AVAILABLE  AGE
-flux                1/1    1           1          42s
-flux-helm-operator  1/1    1           1          42s
-flux-memcached      1/1    1           1          42s
+flux                1/1    1           1          16s
+flux-helm-operator  1/1    1           1          16s
+flux-memcached      1/1    1           1          16s
 
 ==> v1/Pod(related)
 NAME                                 READY  STATUS   RESTARTS  AGE
-flux-585f49f8b9-vwncn                1/1    Running  0         42s
-flux-helm-operator-6877b9f564-sqpv2  1/1    Running  0         42s
-flux-memcached-8545bfdbdd-hlcnz      1/1    Running  0         42s
+flux-bbb76576-8clvg                  1/1    Running  0         16s
+flux-helm-operator-6877b9f564-rt5rl  1/1    Running  0         16s
+flux-memcached-88db78d9d-vnrl7       1/1    Running  0         16s
 
 ==> v1/Secret
 NAME             TYPE    DATA  AGE
-flux-git-deploy  Opaque  1     42s
+flux-git-deploy  Opaque  1     16s
 
 ==> v1/Service
 NAME            TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)    AGE
-flux            ClusterIP  100.68.237.154  <none>       3030/TCP   42s
-flux-memcached  ClusterIP  100.67.222.178  <none>       11211/TCP  42s
+flux            ClusterIP  100.70.220.201  <none>       3030/TCP   16s
+flux-memcached  ClusterIP  100.64.195.153  <none>       11211/TCP  16s
 
 ==> v1/ServiceAccount
 NAME  SECRETS  AGE
-flux  1        42s
+flux  1        16s
 
 ==> v1beta1/ClusterRole
 NAME  AGE
-flux  42s
+flux  16s
 
 ==> v1beta1/ClusterRoleBinding
 NAME  AGE
-flux  42s
+flux  16s
 
 
 NOTES:
@@ -260,7 +254,7 @@ if [ -x /usr/bin/chromium-browser ]; then chromium-browser https://github.com/ru
 Output:
 
 ```text
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIwnEd0awRYwZbcHukvovcJqllWll7DthW4NYX3Y3Kr8j/ZqgIbMJbmF2E5bwvRk0puUfSFynMVuEZUu+1KqfPhcCFjY5AzjFHQqdrvoLMeuRx9wY0lAYCwbVUqPedCwkeHOCnpgtM+I3nW3AhlotIOgdzKebR+Ox7jjke0L4cuR7IySxhQdkrdwJtq0miN3zmWu8W4LplSBs0PdQYXrl1ApBZ39fB+WPgrorwvtIgCnXYSgyfj9d50VWZjpNdnLRB1etiKHqr1uF3e5cxNyc7CKn/A5L8Dkl9Aa2JS/IHp5ErNyfGzJrkiQs1V92k37xGHPDDkhxZhtI8gvkRy/Ar
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyGvcJPcFxvsc9SHtJiOt7G6pvNQgmcf+PIIfy6PoEvXK2naXmKw68+dtKeIoMzvp63QxoNB+B6qamMbkWqaVCjS4glAXKmf68k/eCazcPNZaQRmL/YUmgmyZ8AF02fDmM/RQMz/2hUtUE6UYs/T5vYUdDwYb09nOmVMgclY6jbmQ4b0OgG18p6RnNYtJ4wysC6+wEoy5xVljKWRE03UxD3pJbVdk5KPcJ/mnX44tUwU/oE/Ezz7LaMjVXnXns8zKu3LOAIeolcCFVJUbUMQhOuvwrXp+Sag1VV3OG4Uy6P3/0wIajEumzHO4GvpAEJ1F1Ny4b692wP/TdUX/WWAIr
 ```
 
 Add the ssh key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository](https://github.com/ruzickap/k8s-flux-repository)"
