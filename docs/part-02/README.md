@@ -267,3 +267,5 @@ Add the ssh key to the GitHub "[https://github.com/ruzickap/k8s-flux-repository]
 
 ![Flux logo](https://raw.githubusercontent.com/fluxcd/flux/18e5174581f44ed8c9a881dd5071179eed1ebf4d/docs/_files/flux.svg?sanitize=true
 "Flux logo")
+
+-----
