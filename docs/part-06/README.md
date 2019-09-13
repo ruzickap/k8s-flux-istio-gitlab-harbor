@@ -72,7 +72,7 @@ rm -rf /home/${USER}/.helm
 Docker certificate cleanup if exists:
 
 ```bash
-rm -rf /etc/docker/certs.d/harbor.${MY_DOMAIN}
+sudo rm -rf /etc/docker/certs.d/harbor.${MY_DOMAIN}
 ```
 
 Docker clean-up:
