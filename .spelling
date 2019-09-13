@@ -1,5 +1,6 @@
 awscli
 Cleanup
+cleanup
 CronJobs
 DaemonSets
 fluxcli
