@@ -1,6 +1,6 @@
 # Kubernetes + Flux + Istio + GitLab + Harbor
 
-[![Build Status](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-flux-istio-gitlab-harbor)
+[![Build Status](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/workflows/vuepress-build/badge.svg)](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/actions?workflow=vuepress-build)
 
 * GitHub repository: [https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor)
 * Web Pages: [https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor](https://ruzickap.github.io/k8s-flux-istio-gitlab-harbor)
