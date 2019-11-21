@@ -5,6 +5,7 @@ CronJobs
 DaemonSets
 fluxcli
 GitLab
+GitOps
 HelmRelease
 Istio
 k8s

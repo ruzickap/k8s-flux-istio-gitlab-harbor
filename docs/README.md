@@ -29,6 +29,7 @@
 * [https://github.com/stefanprodan/gitops-istio](https://github.com/stefanprodan/gitops-istio)
 * [https://github.com/stefanprodan/openfaas-flux](https://github.com/stefanprodan/openfaas-flux)
 * [https://github.com/fluxcd/helm-operator-get-started](https://github.com/fluxcd/helm-operator-get-started)
+* [EKS GitOps challenge](https://eks.handson.flagger.dev/)
 
 ![Flux logo](https://raw.githubusercontent.com/fluxcd/flux/18e5174581f44ed8c9a881dd5071179eed1ebf4d/docs/_files/flux-logo-vertical.svg?sanitize=true
 "Flux logo")
