@@ -6,20 +6,20 @@ metadata:
   namespace: istio-system
 spec:
   servers:
-  - hosts:
-    - '*'
-    port:
-      name: http
-      number: 80
-      protocol: HTTP
-  - hosts:
-    - '*'
-    port:
-      name: https-default
-      number: 443
-      protocol: HTTPS
-    tls:
-      credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
-      mode: SIMPLE
-      privateKey: sds
-      serverCertificate: sds
+    - hosts:
+        - '*'
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - hosts:
+        - '*'
+      port:
+        name: https-default
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
+        mode: SIMPLE
+        privateKey: sds
+        serverCertificate: sds

@@ -8,33 +8,33 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-  - port:
-      number: 22
-      name: ssh-gitlab
-      protocol: TCP
-    hosts:
-    - gitlab.${MY_DOMAIN}
-  - port:
-      number: 80
-      name: http-gitlab
-      protocol: HTTP
-    hosts:
-    - gitlab.${MY_DOMAIN}
-    - minio.${MY_DOMAIN}
-    tls:
-      httpsRedirect: true
-  - port:
-      number: 443
-      name: https-gitlab
-      protocol: HTTPS
-    hosts:
-    - gitlab.${MY_DOMAIN}
-    - minio.${MY_DOMAIN}
-    tls:
-      credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
-      mode: SIMPLE
-      privateKey: sds
-      serverCertificate: sds
+    - port:
+        number: 22
+        name: ssh-gitlab
+        protocol: TCP
+      hosts:
+        - gitlab.${MY_DOMAIN}
+    - port:
+        number: 80
+        name: http-gitlab
+        protocol: HTTP
+      hosts:
+        - gitlab.${MY_DOMAIN}
+        - minio.${MY_DOMAIN}
+      tls:
+        httpsRedirect: true
+    - port:
+        number: 443
+        name: https-gitlab
+        protocol: HTTPS
+      hosts:
+        - gitlab.${MY_DOMAIN}
+        - minio.${MY_DOMAIN}
+      tls:
+        credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
+        mode: SIMPLE
+        privateKey: sds
+        serverCertificate: sds
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -43,17 +43,17 @@ metadata:
   namespace: gitlab
 spec:
   hosts:
-  - gitlab.${MY_DOMAIN}
+    - gitlab.${MY_DOMAIN}
   gateways:
-  - gitlab-gateway
+    - gitlab-gateway
   tcp:
-  - match:
-    - port: 22
-    route:
-    - destination:
-        host: gitlab-gitlab-shell.gitlab.svc.cluster.local
-        port:
-          number: 22
+    - match:
+        - port: 22
+      route:
+        - destination:
+            host: gitlab-gitlab-shell.gitlab.svc.cluster.local
+            port:
+              number: 22
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -62,23 +62,23 @@ metadata:
   namespace: gitlab
 spec:
   hosts:
-  - gitlab.${MY_DOMAIN}
+    - gitlab.${MY_DOMAIN}
   gateways:
-  - gitlab-gateway
+    - gitlab-gateway
   http:
-  - route:
-    - destination:
-        host: gitlab-unicorn.gitlab.svc.cluster.local
-        port:
-          number: 8181
-  - match:
-    - uri:
-        prefix: /admin/sidekiq
-    route:
-    - destination:
-        host: gitlab-unicorn.gitlab.svc.cluster.local
-        port:
-          number: 8080
+    - route:
+        - destination:
+            host: gitlab-unicorn.gitlab.svc.cluster.local
+            port:
+              number: 8181
+    - match:
+        - uri:
+            prefix: /admin/sidekiq
+      route:
+        - destination:
+            host: gitlab-unicorn.gitlab.svc.cluster.local
+            port:
+              number: 8080
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -87,12 +87,12 @@ metadata:
   namespace: gitlab
 spec:
   hosts:
-  - minio.${MY_DOMAIN}
+    - minio.${MY_DOMAIN}
   gateways:
-  - gitlab-gateway
+    - gitlab-gateway
   http:
-  - route:
-    - destination:
-        host: gitlab-minio-svc.gitlab.svc.cluster.local
-        port:
-          number: 9000
+    - route:
+        - destination:
+            host: gitlab-minio-svc.gitlab.svc.cluster.local
+            port:
+              number: 9000

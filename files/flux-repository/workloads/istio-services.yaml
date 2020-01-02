@@ -8,29 +8,29 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-  - port:
-      number: 80
-      name: http-services
-      protocol: HTTP
-    hosts:
-    - grafana.${MY_DOMAIN}
-    - jaeger.${MY_DOMAIN}
-    - kiali.${MY_DOMAIN}
-    - prometheus.${MY_DOMAIN}
-  - port:
-      number: 443
-      name: https-services
-      protocol: HTTPS
-    hosts:
-    - grafana.${MY_DOMAIN}
-    - jaeger.${MY_DOMAIN}
-    - kiali.${MY_DOMAIN}
-    - prometheus.${MY_DOMAIN}
-    tls:
-      credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
-      mode: SIMPLE
-      privateKey: sds
-      serverCertificate: sds
+    - port:
+        number: 80
+        name: http-services
+        protocol: HTTP
+      hosts:
+        - grafana.${MY_DOMAIN}
+        - jaeger.${MY_DOMAIN}
+        - kiali.${MY_DOMAIN}
+        - prometheus.${MY_DOMAIN}
+    - port:
+        number: 443
+        name: https-services
+        protocol: HTTPS
+      hosts:
+        - grafana.${MY_DOMAIN}
+        - jaeger.${MY_DOMAIN}
+        - kiali.${MY_DOMAIN}
+        - prometheus.${MY_DOMAIN}
+      tls:
+        credentialName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
+        mode: SIMPLE
+        privateKey: sds
+        serverCertificate: sds
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -39,15 +39,15 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - grafana.${MY_DOMAIN}
+    - grafana.${MY_DOMAIN}
   gateways:
-  - istio-services-gateway
+    - istio-services-gateway
   http:
-  - route:
-    - destination:
-        host: grafana.istio-system.svc.cluster.local
-        port:
-          number: 3000
+    - route:
+        - destination:
+            host: grafana.istio-system.svc.cluster.local
+            port:
+              number: 3000
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -56,15 +56,15 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - jaeger.${MY_DOMAIN}
+    - jaeger.${MY_DOMAIN}
   gateways:
-  - istio-services-gateway
+    - istio-services-gateway
   http:
-  - route:
-    - destination:
-        host: tracing.istio-system.svc.cluster.local
-        port:
-          number: 80
+    - route:
+        - destination:
+            host: tracing.istio-system.svc.cluster.local
+            port:
+              number: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -73,15 +73,15 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - kiali.${MY_DOMAIN}
+    - kiali.${MY_DOMAIN}
   gateways:
-  - istio-services-gateway
+    - istio-services-gateway
   http:
-  - route:
-    - destination:
-        host: kiali.istio-system.svc.cluster.local
-        port:
-          number: 20001
+    - route:
+        - destination:
+            host: kiali.istio-system.svc.cluster.local
+            port:
+              number: 20001
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -90,13 +90,12 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - prometheus.${MY_DOMAIN}
+    - prometheus.${MY_DOMAIN}
   gateways:
-  - istio-services-gateway
+    - istio-services-gateway
   http:
-  - route:
-    - destination:
-        host: prometheus.istio-system.svc.cluster.local
-        port:
-          number: 9090
----
+    - route:
+        - destination:
+            host: prometheus.istio-system.svc.cluster.local
+            port:
+              number: 9090
