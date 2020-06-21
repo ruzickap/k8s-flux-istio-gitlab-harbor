@@ -1,9 +1,9 @@
 module.exports = {
-  title: "Kubernetes + Flux + Istio + GitLab + Harbor",
-  description: "Kubernetes + Flux + Istio + GitLab + Harbor",
+  title: 'Kubernetes + Flux + Istio + GitLab + Harbor',
+  description: 'Kubernetes + Flux + Istio + GitLab + Harbor',
   base: '/k8s-flux-istio-gitlab-harbor/',
   head: [
-    ['link', { rel: "icon", href: "https://kubernetes.io/images/favicon.png" }]
+    ['link', { rel: 'icon', href: 'https://kubernetes.io/images/favicon.png' }]
   ],
   themeConfig: {
     displayAllHeaders: true,
@@ -19,7 +19,7 @@ module.exports = {
         items: [
           { text: 'Flux', link: 'https://www.weave.works/oss/flux/' },
           { text: 'GitLab', link: 'https://gitlab.com' },
-          { text: 'Harbor', link: 'https://goharbor.io' },
+          { text: 'Harbor', link: 'https://goharbor.io' }
         ]
       }
     ],
@@ -29,7 +29,7 @@ module.exports = {
       '/part-02/',
       '/part-03/',
       '/part-04/',
-      '/part-05/',
+      '/part-05/'
     ]
   },
   plugins: [
