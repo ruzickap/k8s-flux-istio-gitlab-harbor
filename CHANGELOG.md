@@ -1,11 +1,19 @@
 # Changelog
 
+## [v0.1.0](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.0.2...v0.1.0) (2020-09-17)
+
+- Add actions/checkout with gh-page add use GITHUB_TOKEN with super-linter [`#67`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/67)
+- Disable the linting process for AWS States Language (VALIDATE_STATES) [`#62`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/62)
+- Replace markdown linter [`#54`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/54)
+- Fix GH variables to pass the tests [`#49`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/49)
+- Add super-linter + fix related issues [`#48`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/48)
+- Move to GitHub's Dependabot (version 2) [`#41`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/41)
+- Use shell-linter in latest version [`#36`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/36)
+- CHANGELOG file update [`#34`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/34)
+
 ## [v0.0.2](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.0.1...v0.0.2) (2020-05-12)
 
 - Ignore CHANGELOG.md when doing markdown checks [`#33`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/33)
-- Bump @vuepress/plugin-back-to-top from 1.0.4 to 1.1.0 [`#6`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/6)
-- Bump @vuepress/plugin-medium-zoom from 1.0.4 to 1.1.0 [`#4`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/4)
-- Bump vuepress from 1.0.4 to 1.1.0 [`#5`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/5)
 - Bump @vuepress/plugin-back-to-top from 1.0.3 to 1.0.4 [`#3`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/3)
 - Improve formatting of json files [`c03b0f2`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/c03b0f292f1808c9a14bde814324bab207cf7e83)
 - Add .pre-commit-config.yaml + .release-it.yml to .gitignore [`ba4e782`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/ba4e782fa5c57f35814db4e2829f60d524a51015)
@@ -88,7 +96,6 @@
 - Add flux-repository [`3412b1f`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/3412b1f7a69b46adb0866aa16d2f45298a83d685)
 - Add helm cleanup [`32d3d39`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/32d3d3948f5d9d6e68a10e42fbc139303e911f45)
 - part-02 rewritten [`e67764b`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/e67764bd62b262bfdd582d5ec7cb1ec6ced6c2ae)
-- Add dependabot [`36e7bb3`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/36e7bb37e83a5f29ce8adc4573d729c5b86d9f9a)
 - Cleaning README updated by removing tmp and deleting GitHub repo [`127fd63`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/127fd637c8f557b04a6b0ae26c26796b815276d1)
 - part-02 added [`c454379`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/c45437903aa69dcc6b7951cd461dda201c605da4)
 - Adding scripts [`dcfe9f2`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/dcfe9f2acb9f20f51e9f84977f2344bdaa00f1a2)
