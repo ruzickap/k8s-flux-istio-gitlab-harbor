@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.1.1](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.1.0...v0.1.1) (2021-12-20)
+
+- Improve GH Action files [`#99`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/99)
+- Update npm [`#98`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/98)
+- Fix linter issues [`#97`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/97)
+- Upgrade GH Actions versions [`#96`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/96)
+- npm update [`#95`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/95)
+- Disable jscpd [`#91`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/91)
+- Disable jscpd [`#90`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/90)
+- Disable jscpd [`#89`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/89)
+- Upgrade action-my-broken-link-checker [`#81`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/81)
+- Ignore CHANGELOG.md from being checked by super-linter [`#77`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/77)
+- Fix My Broken Link Checker parameter [`#70`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/70)
+- Update package-lock.json [`#69`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/69)
+
 ## [v0.1.0](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.0.2...v0.1.0) (2020-09-17)
 
 - Add actions/checkout with gh-page add use GITHUB_TOKEN with super-linter [`#67`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/67)
@@ -9,7 +24,6 @@
 - Add super-linter + fix related issues [`#48`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/48)
 - Move to GitHub's Dependabot (version 2) [`#41`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/41)
 - Use shell-linter in latest version [`#36`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/36)
-- CHANGELOG file update [`#34`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/34)
 
 ## [v0.0.2](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.0.1...v0.0.2) (2020-05-12)
 
