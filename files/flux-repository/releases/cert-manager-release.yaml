@@ -20,8 +20,6 @@ spec:
       tag: v0.9.0
     webhook:
       enabled: false
-
 # curl -L -s https://charts.jetstack.io/index.yaml
 # curl https://quay.io/v1/repositories/jetstack/cert-manager-controller/tags | jq
-# curl https://quay.io/v2/jetstack/cert-manager-controller/manifests/latest| jq
 # curl https://quay.io/v1/repositories/jetstack/cert-manager-controller/tags | jq '.' | less

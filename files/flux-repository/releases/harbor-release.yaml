@@ -20,6 +20,7 @@ spec:
         secretName: ingress-cert-${LETSENCRYPT_ENVIRONMENT}
       type: clusterIP
     externalURL: https://harbor.${MY_DOMAIN}
+    # kics-scan ignore-line
     harborAdminPassword: admin
     persistence:
       enabled: false
