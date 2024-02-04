@@ -1,0 +1,6 @@
+.*.mylabs.dev
+https://charts.appscode.com/stable/
+https://git.k8s.io/community/contributors/devel/api-conventions.md.*
+https://github.com/ruzickap/k8s-flux-repository
+https://storage.googleapis.com/istio-release/releases/1.2.5/charts/
+(http|https)://(jaeger|grafana|harbor)/

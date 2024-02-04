@@ -53,6 +53,7 @@ spec:
         configureCertmanager: false
         enabled: false
       initialRootPassword:
+        # kics-scan ignore-line
         secret: gitlab-initial-root-password
     minio:
       persistence:
