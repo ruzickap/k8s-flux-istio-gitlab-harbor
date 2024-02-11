@@ -17,7 +17,7 @@ module.exports = {
       {
         text: 'Links',
         items: [
-          { text: 'Flux', link: 'https://www.weave.works/oss/flux/' },
+          { text: 'Flux', link: 'https://fluxcd.io' },
           { text: 'GitLab', link: 'https://gitlab.com' },
           { text: 'Harbor', link: 'https://goharbor.io' }
         ]
