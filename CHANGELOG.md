@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.0](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.1.1...v0.2.0) (2024-03-24)
+
+
+### Features
+
+* **gh:** add default GitHub repo files ([#155](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/155)) ([974cf2c](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/974cf2c8ee0ed824a9b12a56648edd683232bdd7))
+* **gh:** add default GitHub repo files ([#156](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/156)) ([fb6be60](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/fb6be609b41ab0e13bb0001a25554cecd7451693))
+* **gh:** add default GitHub repo files ([#160](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/160)) ([e6cc8fc](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/e6cc8fca54e40302d9d046b5fb647442c8692bd9))
+* **gh:** add default GitHub repo files ([#161](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/161)) ([7b377af](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/7b377af1cb7c87d37ddc96d599ec261ca7e1f57c))
+* **gh:** add default GitHub repo files ([#166](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/166)) ([8a683e5](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/8a683e5a2f16b016738a27f3e74bbc11f1f9b576))
+* **gha:** unify GHA - renovate, megalinter, markdown, and others ([#152](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/152)) ([7e4e597](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/7e4e597068c66d9eef93505e197fbcbe5778e565))
+
+
+### Bug Fixes
+
+* **url:** fix flux URL ([#159](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/issues/159)) ([1f36c7e](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/commit/1f36c7ee66e59f21b5ac6fe548480625ee9924fb))
+
 ## [v0.1.1](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/compare/v0.1.0...v0.1.1) (2021-12-20)
 
 - Improve GH Action files [`#99`](https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/pull/99)
