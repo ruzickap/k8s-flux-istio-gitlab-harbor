@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flux image operations | Kubernetes + Flux + Istio + GitLab + Harbor</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="https://raw.githubusercontent.com/kubernetes/kubernetes/d9a58a39b69a0eaec5797e0f7a0f9472b4829ab0/logo/logo.svg">
+    <meta name="description" content="Kubernetes + Flux + Istio + GitLab + Harbor">
+    
+    <link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/css/0.styles.183b60b2.css" as="style"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/app.5d525693.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/2.a27de003.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/1.30a6593f.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/26.d0ce75dd.js" as="script"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/10.340b7a91.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/11.6724c971.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/12.0f6b2c7f.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/13.0f6f4ef5.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/14.28b41666.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/15.d3972987.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/16.4c24402c.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/17.6cd3a12a.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/18.8d7e6487.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/19.78b16bd4.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/20.a3f134b4.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/21.3fb0cd72.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/22.754c2e50.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/23.8f47d8d6.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/24.8d82663a.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/25.85328811.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/27.8741302e.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/28.3c8dbd55.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/3.6b4152e0.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/4.bea5e217.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/5.ac8fedb2.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/6.76ff54c2.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/7.98538131.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/vendors~docsearch.d098b00c.js">
+    <link rel="stylesheet" href="/k8s-flux-istio-gitlab-harbor/assets/css/0.styles.183b60b2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/k8s-flux-istio-gitlab-harbor/" class="home-link router-link-active"><img src="https://raw.githubusercontent.com/kubernetes/kubernetes/d9a58a39b69a0eaec5797e0f7a0f9472b4829ab0/logo/logo.svg" alt="Kubernetes + Flux + Istio + GitLab + Harbor" class="logo"> <span class="site-name can-hide">Kubernetes + Flux + Istio + GitLab + Harbor</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/k8s-flux-istio-gitlab-harbor/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Links" class="dropdown-title"><span class="title">Links</span> <span class="arrow down"></span></button> <button type="button" aria-label="Links" class="mobile-dropdown-title"><span class="title">Links</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Flux
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitLab
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://goharbor.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Harbor
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/k8s-flux-istio-gitlab-harbor/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Links" class="dropdown-title"><span class="title">Links</span> <span class="arrow down"></span></button> <button type="button" aria-label="Links" class="mobile-dropdown-title"><span class="title">Links</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Flux
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitLab
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://goharbor.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Harbor
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/k8s-flux-istio-gitlab-harbor/" aria-current="page" class="sidebar-link">Kubernetes + Flux + Istio + GitLab + Harbor</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#requirements" class="sidebar-link">Requirements</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#content" class="sidebar-link">Content</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#links" class="sidebar-link">Links</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-01/" class="sidebar-link">Create k8s cluster</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#prepare-the-local-working-environment" class="sidebar-link">Prepare the local working environment</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#configure-aws" class="sidebar-link">Configure AWS</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#create-k8s-in-aws" class="sidebar-link">Create K8s in AWS</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-02/" class="sidebar-link">Install Helm + Flux</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-02/#install-helm" class="sidebar-link">Install Helm</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-02/#install-flux" class="sidebar-link">Install Flux</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-03/" class="sidebar-link">Install basic application using Flux</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#cert-manager" class="sidebar-link">cert-manager</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#kubed" class="sidebar-link">kubed</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#istio" class="sidebar-link">Istio</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#harbor" class="sidebar-link">Harbor</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#prepare-docker-images" class="sidebar-link">Prepare docker images</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-04/" aria-current="page" class="active sidebar-link">Flux image operations</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#rolling-back-a-workload" class="sidebar-link">Rolling back a workload</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#image-tag-filtering" class="sidebar-link">Image Tag Filtering</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#automated-container-image-installation" class="sidebar-link">Automated container image installation</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#remove-the-applications-using-git-commit" class="sidebar-link">Remove the applications using git commit</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-05/" class="sidebar-link">Flux Helm Chart operations</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#install-gitlab-using-flux" class="sidebar-link">Install GitLab using flux</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#run-and-application-via-flux-helmrelease" class="sidebar-link">Run and application via Flux &quot;HelmRelease&quot;</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#gitlab-upgrade" class="sidebar-link">GitLab upgrade</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="flux-image-operations"><a href="#flux-image-operations" class="header-anchor">#</a> Flux image operations</h1> <p>Set the namespace (<code>flux</code>) where flux was installed for running <code>fluxctl</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">FLUX_FORWARD_NAMESPACE</span><span class="token operator">=</span>flux
+</code></pre></div><p>Check how the git repository looks like in GitHub:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-x</span> /usr/bin/chromium-browser <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> chromium-browser https://github.com/ruzickap/k8s-flux-repository/ <span class="token operator">&amp;</span> <span class="token keyword">fi</span>
+</code></pre></div><p>Examine git Flux repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">ls</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>README.md
+namespaces/cert-manager-ns.yaml
+namespaces/harbor-ns.yaml
+namespaces/istio-ns.yaml
+namespaces/kubed-ns.yaml
+releases/cert-manager-release.yaml
+releases/harbor-release.yaml
+releases/istio-init-release.yaml
+releases/istio-release.yaml
+releases/kubed-release.yaml
+workloads/cert-manager-00-crds.yaml
+workloads/harbor-services.yaml
+workloads/istio-gateway.yaml
+workloads/istio-services.yaml
+</code></pre></div><p>Install <a href="https://github.com/stefanprodan/podinfo" target="_blank" rel="noopener noreferrer">podinfo<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> application using
+Flux:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>envsubst <span class="token operator">&lt;&lt;</span> <span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/podinfo.yaml</span>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      containers:
+      - name: podinfo
+        image: &quot;stefanprodan/podinfo:2.1.2&quot;
+        ports:
+        - containerPort: 9898
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-service
+  namespace: default
+  labels:
+    app: podinfo
+spec:
+  type: ClusterIP
+  selector:
+    app: podinfo
+  ports:
+  - name: podinfo-http
+    port: 9898
+    protocol: TCP
+    targetPort: 9898
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: podinfo-http-virtual-service
+  namespace: default
+spec:
+  hosts:
+  - podinfo.<span class="token variable">${MY_DOMAIN}</span>
+  gateways:
+  - istio-system/istio-autogenerated-k8s-ingress
+  http:
+  - route:
+    - destination:
+        host: podinfo-service.default.svc.cluster.local
+        port:
+          number: 9898
+EOF</span>
+</code></pre></div><p>Add it to the git repository and let Flux to deploy the application:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Add podinfo&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+<span class="token function">sleep</span> <span class="token number">40</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'workloads/podinfo.yaml'
+[master 9c58afd] Add podinfo
+ 1 file changed, 54 insertions(+)
+ create mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 9c58afd
+Waiting for 9c58afd to be applied ...
+Done.
+</code></pre></div><p>Start the web browser with <a href="https://podinfo.mylabs.dev" target="_blank" rel="noopener noreferrer">https://podinfo.mylabs.dev<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://podinfo.mylabs.dev
+<span class="token builtin class-name">echo</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-x</span> /usr/bin/chromium-browser <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> chromium-browser <span class="token parameter variable">--incognito</span> https://podinfo.mylabs.dev <span class="token operator">&amp;</span> <span class="token keyword">fi</span>
+</code></pre></div><p>Output:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;hostname&quot;</span><span class="token operator">:</span> <span class="token string">&quot;podinfo-56c6447655-7pwld&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2.1.2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;revision&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ab74d6ef0bd3c5f39090134f59b12837757e80b8&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;color&quot;</span><span class="token operator">:</span> <span class="token string">&quot;blue&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;greetings from podinfo v2.1.2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;goos&quot;</span><span class="token operator">:</span> <span class="token string">&quot;linux&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;goarch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;amd64&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;runtime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;go1.12.7&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;num_goroutine&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;num_cpu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Workloads refers to any cluster resource responsible for the creation
+of containers from versioned images - in Kubernetes these are objects such as
+Deployments, DaemonSets, StatefulSets and CronJobs.</p></div> <p>Check whether Flux can see any running workloads:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-workloads
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    CONTAINER  IMAGE                       RELEASE  POLICY
+default:deployment/podinfo  podinfo    stefanprodan/podinfo:2.1.2  ready
+</code></pre></div><p>Inspect which versions of the image are running in the workload:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-images <span class="token parameter variable">--workload</span> default:deployment/podinfo <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo  podinfo    stefanprodan/podinfo
+                                       |   2.1.3             13 Aug 19 09:33 UTC
+                                       |   latest            13 Aug 19 09:33 UTC
+                                       '-&gt; 2.1.2             13 Aug 19 07:53 UTC
+                                           2.1.1             13 Aug 19 07:51 UTC
+                                           2.1.0             07 Aug 19 13:18 UTC
+                                           2.0.5             07 Aug 19 12:50 UTC
+                                           2.0.4             07 Aug 19 12:48 UTC
+                                           2.0.3             07 Aug 19 12:45 UTC
+                                           2.0.2             07 Aug 19 12:41 UTC
+                                           2.0.1             07 Aug 19 12:39 UTC
+</code></pre></div><p>Update all images belongs to &quot;podinfo deployment&quot;:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl release <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo <span class="token parameter variable">--user</span><span class="token operator">=</span>pruzicka <span class="token parameter variable">--message</span><span class="token operator">=</span><span class="token string">&quot;Update all podinfo images&quot;</span> --update-all-images
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Submitting release ...
+WORKLOAD                    STATUS   UPDATES
+default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -&gt; 2.1.3
+Commit pushed:  f5587fe
+Commit applied: f5587fe
+</code></pre></div><p>Check the git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository show
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>commit f5587fe7887e294b88da88490a17eed61e69b012 (HEAD -&gt; master, tag: flux-sync, origin/master)
+Author: Flux &amp;lt;petr.ruzicka@gmail.com&gt;
+Date:   Thu Aug 29 08:07:13 2019 +0000
+
+    Update all podinfo images
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:1 @
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+@ workloads/podinfo.yaml:19 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: &quot;stefanprodan/podinfo:2.1.2&quot;
+        image: &quot;stefanprodan/podinfo:2.1.3&quot;
+        ports:
+        - containerPort: 9898
+---
+</code></pre></div><p>Verify the updated version:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-images <span class="token parameter variable">--workload</span> default:deployment/podinfo <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo  podinfo    stefanprodan/podinfo
+                                       '-&gt; 2.1.3             13 Aug 19 09:33 UTC
+                                           latest            13 Aug 19 09:33 UTC
+                                           2.1.2             13 Aug 19 07:53 UTC
+                                           2.1.1             13 Aug 19 07:51 UTC
+...
+</code></pre></div><p>Correct image version should be also visible directly from the pod:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl describe pods <span class="token operator">|</span> <span class="token function">grep</span> Image:
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>    Image:          stefanprodan/podinfo:2.1.3
+</code></pre></div><h2 id="rolling-back-a-workload"><a href="#rolling-back-a-workload" class="header-anchor">#</a> Rolling back a workload</h2> <p>Roll back the <code>podinfo</code> image to previous version (2.1.2)</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl release <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo --update-image<span class="token operator">=</span>stefanprodan/podinfo:2.1.2
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Submitting release ...
+WORKLOAD                    STATUS   UPDATES
+default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.3 -&gt; 2.1.2
+Commit pushed:  55c8ed1
+Commit applied: 55c8ed1
+</code></pre></div><p>Check the git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository show
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>commit 55c8ed19b9558e87cf1811f1c9bc0fef576b2e7e (HEAD -&gt; master, origin/master)
+Author: Flux &amp;lt;petr.ruzicka@gmail.com&gt;
+Date:   Thu Aug 29 08:08:59 2019 +0000
+
+    Release stefanprodan/podinfo:2.1.2 to default:deployment/podinfo
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:19 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: &quot;stefanprodan/podinfo:2.1.3&quot;
+        image: &quot;stefanprodan/podinfo:2.1.2&quot;
+        ports:
+        - containerPort: 9898
+---
+</code></pre></div><p>Verify the image version:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-images <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo  podinfo    stefanprodan/podinfo
+                                       |   2.1.3             13 Aug 19 09:33 UTC
+                                       |   latest            13 Aug 19 09:33 UTC
+                                       '-&gt; 2.1.2             13 Aug 19 07:53 UTC
+                                           2.1.1             13 Aug 19 07:51 UTC
+...
+</code></pre></div><h2 id="image-tag-filtering"><a href="#image-tag-filtering" class="header-anchor">#</a> Image Tag Filtering</h2> <p>Set tag for the image:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl policy <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo --tag-all<span class="token operator">=</span><span class="token string">'2.0.*'</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    STATUS   UPDATES
+default:deployment/podinfo  success
+Commit pushed:  3744220
+</code></pre></div><p>See what was pushed to git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository show
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>commit 3744220888d3937b358fb6fc1a88ddf99dbea59a (HEAD -&gt; master, origin/master)
+Author: Flux &amp;lt;petr.ruzicka@gmail.com&gt;
+Date:   Thu Aug 29 08:10:24 2019 +0000
+
+    Updated policies: default:deployment/podinfo
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:7 @ kind: Deployment
+metadata:
+  name: podinfo
+  namespace: default
+  annotations:
+    flux.weave.works/tag.podinfo: glob:2.0.*
+spec:
+  replicas: 1
+  selector:
+</code></pre></div><p>Instruct Flux to update all images for <code>podinfo</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl release <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo --update-all-images
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Submitting release ...
+WORKLOAD                    STATUS   UPDATES
+default:deployment/podinfo  success  podinfo: stefanprodan/podinfo:2.1.2 -&gt; 2.0.5
+Commit pushed:  dd0af19
+Commit applied: dd0af19
+</code></pre></div><p>Check the git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository show
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>commit dd0af19b22b0db8c9e448cae5248a23800d52803 (HEAD -&gt; master, origin/master)
+Author: Flux &amp;lt;petr.ruzicka@gmail.com&gt;
+Date:   Thu Aug 29 08:10:58 2019 +0000
+
+    Release all latest to default:deployment/podinfo
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/podinfo.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/podinfo.yaml:21 @ spec:
+    spec:
+      containers:
+      - name: podinfo
+        image: &quot;stefanprodan/podinfo:2.1.2&quot;
+        image: &quot;stefanprodan/podinfo:2.0.5&quot;
+        ports:
+        - containerPort: 9898
+---
+</code></pre></div><p>Check the versions running in the workload:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-images <span class="token parameter variable">--workload</span><span class="token operator">=</span>default:deployment/podinfo <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                    CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo  podinfo    stefanprodan/podinfo
+                                       |   2.1.3             13 Aug 19 09:33 UTC
+                                       |   latest            13 Aug 19 09:33 UTC
+                                       |   2.1.2             13 Aug 19 07:53 UTC
+                                       |   2.1.1             13 Aug 19 07:51 UTC
+                                       |   2.1.0             07 Aug 19 13:18 UTC
+                                       '-&gt; 2.0.5             07 Aug 19 12:50 UTC
+                                           2.0.4             07 Aug 19 12:48 UTC
+...
+</code></pre></div><h2 id="automated-container-image-installation"><a href="#automated-container-image-installation" class="header-anchor">#</a> Automated container image installation</h2> <p>Open the Harbor container repository: <a href="https://harbor.mylabs.dev" target="_blank" rel="noopener noreferrer">https://harbor.mylabs.dev<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-x</span> /usr/bin/chromium-browser <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> chromium-browser https://harbor.mylabs.dev <span class="token operator">&amp;</span> <span class="token keyword">fi</span>
+</code></pre></div><p>Create <a href="https://github.com/kubernetes-up-and-running/kuard" target="_blank" rel="noopener noreferrer">https://github.com/kubernetes-up-and-running/kuard<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>
+application &quot;manifest&quot;:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>envsubst <span class="token operator">&lt;&lt;</span> <span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/kuard.yaml</span>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  namespace: default
+  annotations:
+    flux.weave.works/automated: &quot;true&quot;
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+  template:
+    metadata:
+      labels:
+        app: kuard
+    spec:
+      containers:
+      - name: kuard
+        image: &quot;harbor.<span class="token variable">${MY_DOMAIN}</span>/library/kuard:v1&quot;
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard-service
+  namespace: default
+  labels:
+    app: kuard
+spec:
+  type: ClusterIP
+  selector:
+    app: kuard
+  ports:
+  - name: kuard-http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kuard-http-virtual-service
+  namespace: default
+spec:
+  hosts:
+  - kuard.<span class="token variable">${MY_DOMAIN}</span>
+  gateways:
+  - istio-system/istio-autogenerated-k8s-ingress
+  http:
+  - route:
+    - destination:
+        host: kuard-service.default.svc.cluster.local
+        port:
+          number: 8080
+EOF</span>
+</code></pre></div><p>Add it to the git repository and let Flux to deploy the application:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Add kuard&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+<span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">[</span> <span class="token variable">$COUNTER</span> <span class="token parameter variable">-lt</span> <span class="token number">12</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>COUNTER<span class="token operator">+</span><span class="token number">1</span><span class="token variable">))</span></span><span class="token punctuation">;</span> fluxctl list-images <span class="token parameter variable">--workload</span> default:deployment/kuard <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null<span class="token punctuation">;</span> <span class="token function">sleep</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'workloads/kuard.yaml'
+[master d792a6f] Add kuard
+ 1 file changed, 56 insertions(+)
+ create mode 100644 workloads/kuard.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is d792a6f
+Waiting for d792a6f to be applied ...
+Done.
+...
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard  image data not available
+                                     '-&gt; v1                           ?
+...
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     '-&gt; v1                           29 Aug 19 07:47 UTC
+...
+</code></pre></div><p>Open the page: <a href="https://kuard.mylabs.dev" target="_blank" rel="noopener noreferrer">https://kuard.mylabs.dev<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-x</span> /usr/bin/chromium-browser <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> chromium-browser <span class="token parameter variable">--incognito</span> https://kuard.mylabs.dev <span class="token operator">&amp;</span> <span class="token keyword">fi</span>
+</code></pre></div><p>Change the <code>VERSION</code> environment variable:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">&quot;s/ENV VERSION=test/ENV VERSION=new_version/&quot;</span> tmp/kuard/Dockerfile
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/kuard/ <span class="token function">diff</span> Dockerfile
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>─────────────────────────────────────────────────────────────────────────────────────────────
+modified: Dockerfile
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ Dockerfile:19 @ COPY . .
+ENV VERBOSE=0
+ENV PKG=github.com/kubernetes-up-and-running/kuard
+ENV ARCH=amd64
+ENV VERSION=test
+ENV VERSION=new_version
+
+# Do the build. Script is part of incoming sources.
+RUN build/build.sh
+</code></pre></div><p>Build <a href="https://github.com/kubernetes-up-and-running/kuard" target="_blank" rel="noopener noreferrer">kuard<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> container
+image and push it to <code>harbor.mylabs.dev/library/kuard:v2</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">docker</span> build <span class="token parameter variable">--tag</span> harbor.<span class="token variable">${MY_DOMAIN}</span>/library/kuard:v2 tmp/kuard
+<span class="token builtin class-name">echo</span> admin <span class="token operator">|</span> <span class="token function">docker</span> login <span class="token parameter variable">--username</span> admin --password-stdin harbor.<span class="token variable">${MY_DOMAIN}</span>
+<span class="token function">docker</span> push harbor.<span class="token variable">${MY_DOMAIN}</span>/library/kuard:v2
+<span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">[</span> <span class="token variable">$COUNTER</span> <span class="token parameter variable">-lt</span> <span class="token number">12</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>COUNTER<span class="token operator">+</span><span class="token number">1</span><span class="token variable">))</span></span><span class="token punctuation">;</span> fluxctl list-images <span class="token parameter variable">--workload</span> default:deployment/kuard <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null<span class="token punctuation">;</span> <span class="token function">sleep</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Sending build context to Docker daemon  3.378MB
+Step 1/14 : FROM golang:1.12-alpine AS build
+ ---&gt; e0d646523991
+...
+Step 14/14 : CMD [ &quot;/kuard&quot; ]
+ ---&gt; Using cache
+ ---&gt; 652d18a08b2d
+Successfully built 652d18a08b2d
+Successfully tagged harbor.mylabs.dev/library/kuard:v2
+WARNING! Your password will be stored unencrypted in /home/pruzicka/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+The push refers to repository [harbor.mylabs.dev/library/kuard]
+4af36e68af9b: Pushed
+03901b4a2ea8: Layer already exists
+v2: digest: sha256:14e584451dfd99dcd34e67226701786b952a8c5be11ba6091e64d690364bc646 size: 739
+...
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     '-&gt; v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-&gt; v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-&gt; v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     |   v2                           29 Aug 19 07:49 UTC
+                                     '-&gt; v1                           29 Aug 19 07:47 UTC
+WORKLOAD                  CONTAINER  IMAGE                            CREATED
+default:deployment/kuard  kuard      harbor.mylabs.dev/library/kuard
+                                     '-&gt; v2                           29 Aug 19 07:49 UTC
+                                         v1                           29 Aug 19 07:47 UTC
+</code></pre></div><p>Check the git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository pull <span class="token parameter variable">-q</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository show
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>commit c8e39248374934a8f9b4f184deb689eedb8f8cb4 (HEAD -&gt; master, origin/master)
+Author: Flux &amp;lt;petr.ruzicka@gmail.com&gt;
+Date:   Thu Aug 29 08:21:43 2019 +0000
+
+    Auto-release harbor.mylabs.dev/library/kuard:v2
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+modified: workloads/kuard.yaml
+─────────────────────────────────────────────────────────────────────────────────────────────
+@ workloads/kuard.yaml:1 @
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+@ workloads/kuard.yaml:21 @ spec:
+    spec:
+      containers:
+      - name: kuard
+        image: &quot;harbor.mylabs.dev/library/kuard:v1&quot;
+        image: &quot;harbor.mylabs.dev/library/kuard:v2&quot;
+        ports:
+        - containerPort: 8080
+---
+</code></pre></div><h2 id="remove-the-applications-using-git-commit"><a href="#remove-the-applications-using-git-commit" class="header-anchor">#</a> Remove the applications using git commit</h2> <p>See the running pods:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl get virtualservice,service,deployment,pods
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME                                                              GATEWAYS                                         HOSTS                  AGE
+virtualservice.networking.istio.io/kuard-http-virtual-service     [istio-system/istio-autogenerated-k8s-ingress]   [kuard.mylabs.dev]     14m
+virtualservice.networking.istio.io/podinfo-http-virtual-service   [istio-system/istio-autogenerated-k8s-ingress]   [podinfo.mylabs.dev]   29m
+
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/kuard-service     ClusterIP   100.70.120.183   &amp;lt;none&gt;        8080/TCP   14m
+service/kubernetes        ClusterIP   100.64.0.1       &amp;lt;none&gt;        443/TCP    55m
+service/podinfo-service   ClusterIP   100.70.190.65    &amp;lt;none&gt;        9898/TCP   29m
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/kuard     1/1     1            1           14m
+deployment.extensions/podinfo   1/1     1            1           29m
+
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/kuard-5b8478d4-nksgf       1/1     Running   0          10m
+pod/podinfo-5f4bf4fd57-clsmm   1/1     Running   0          21m
+</code></pre></div><p>Let's remove the <code>podinfo</code> and <code>kuard</code> application:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">rm</span> tmp/k8s-flux-repository/workloads/podinfo.yaml tmp/k8s-flux-repository/workloads/kuard.yaml
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Remove podinfo and kuard&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>remove 'workloads/kuard.yaml'
+remove 'workloads/podinfo.yaml'
+[master 594fe1e] Remove podinfo and kuard
+ 2 files changed, 114 deletions(-)
+ delete mode 100644 workloads/kuard.yaml
+ delete mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 594fe1e
+Waiting for 594fe1e to be applied ...
+Done.
+</code></pre></div><p>Check the pods - Flux should remove the <code>podinfo</code> pod:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl get virtualservice,service,deployment,pods
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   100.64.0.1   &amp;lt;none&gt;        443/TCP   57m
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/edit/master/docs/part-04/README.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">6/30/2024, 3:12:58 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/k8s-flux-istio-gitlab-harbor/part-03/" class="prev">
+        Install basic application using Flux
+      </a></span> <span class="next"><a href="/k8s-flux-istio-gitlab-harbor/part-05/">
+        Flux Helm Chart operations
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/k8s-flux-istio-gitlab-harbor/assets/js/app.5d525693.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/2.a27de003.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/1.30a6593f.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/26.d0ce75dd.js" defer></script>
+  </body>
+</html>

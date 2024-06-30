@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flux Helm Chart operations | Kubernetes + Flux + Istio + GitLab + Harbor</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="https://raw.githubusercontent.com/kubernetes/kubernetes/d9a58a39b69a0eaec5797e0f7a0f9472b4829ab0/logo/logo.svg">
+    <meta name="description" content="Kubernetes + Flux + Istio + GitLab + Harbor">
+    
+    <link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/css/0.styles.183b60b2.css" as="style"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/app.5d525693.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/2.a27de003.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/1.30a6593f.js" as="script"><link rel="preload" href="/k8s-flux-istio-gitlab-harbor/assets/js/27.8741302e.js" as="script"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/10.340b7a91.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/11.6724c971.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/12.0f6b2c7f.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/13.0f6f4ef5.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/14.28b41666.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/15.d3972987.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/16.4c24402c.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/17.6cd3a12a.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/18.8d7e6487.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/19.78b16bd4.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/20.a3f134b4.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/21.3fb0cd72.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/22.754c2e50.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/23.8f47d8d6.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/24.8d82663a.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/25.85328811.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/26.d0ce75dd.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/28.3c8dbd55.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/3.6b4152e0.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/4.bea5e217.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/5.ac8fedb2.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/6.76ff54c2.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/7.98538131.js"><link rel="prefetch" href="/k8s-flux-istio-gitlab-harbor/assets/js/vendors~docsearch.d098b00c.js">
+    <link rel="stylesheet" href="/k8s-flux-istio-gitlab-harbor/assets/css/0.styles.183b60b2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/k8s-flux-istio-gitlab-harbor/" class="home-link router-link-active"><img src="https://raw.githubusercontent.com/kubernetes/kubernetes/d9a58a39b69a0eaec5797e0f7a0f9472b4829ab0/logo/logo.svg" alt="Kubernetes + Flux + Istio + GitLab + Harbor" class="logo"> <span class="site-name can-hide">Kubernetes + Flux + Istio + GitLab + Harbor</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/k8s-flux-istio-gitlab-harbor/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Links" class="dropdown-title"><span class="title">Links</span> <span class="arrow down"></span></button> <button type="button" aria-label="Links" class="mobile-dropdown-title"><span class="title">Links</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Flux
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitLab
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://goharbor.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Harbor
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/k8s-flux-istio-gitlab-harbor/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Links" class="dropdown-title"><span class="title">Links</span> <span class="arrow down"></span></button> <button type="button" aria-label="Links" class="mobile-dropdown-title"><span class="title">Links</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Flux
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitLab
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://goharbor.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Harbor
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/k8s-flux-istio-gitlab-harbor/" aria-current="page" class="sidebar-link">Kubernetes + Flux + Istio + GitLab + Harbor</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#requirements" class="sidebar-link">Requirements</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#content" class="sidebar-link">Content</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/#links" class="sidebar-link">Links</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-01/" class="sidebar-link">Create k8s cluster</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#prepare-the-local-working-environment" class="sidebar-link">Prepare the local working environment</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#configure-aws" class="sidebar-link">Configure AWS</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-01/#create-k8s-in-aws" class="sidebar-link">Create K8s in AWS</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-02/" class="sidebar-link">Install Helm + Flux</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-02/#install-helm" class="sidebar-link">Install Helm</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-02/#install-flux" class="sidebar-link">Install Flux</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-03/" class="sidebar-link">Install basic application using Flux</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#cert-manager" class="sidebar-link">cert-manager</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#kubed" class="sidebar-link">kubed</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#istio" class="sidebar-link">Istio</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#harbor" class="sidebar-link">Harbor</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-03/#prepare-docker-images" class="sidebar-link">Prepare docker images</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-04/" class="sidebar-link">Flux image operations</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#rolling-back-a-workload" class="sidebar-link">Rolling back a workload</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#image-tag-filtering" class="sidebar-link">Image Tag Filtering</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#automated-container-image-installation" class="sidebar-link">Automated container image installation</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-04/#remove-the-applications-using-git-commit" class="sidebar-link">Remove the applications using git commit</a></li></ul></li><li><a href="/k8s-flux-istio-gitlab-harbor/part-05/" aria-current="page" class="active sidebar-link">Flux Helm Chart operations</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#install-gitlab-using-flux" class="sidebar-link">Install GitLab using flux</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#run-and-application-via-flux-helmrelease" class="sidebar-link">Run and application via Flux &quot;HelmRelease&quot;</a></li><li class="sidebar-sub-header"><a href="/k8s-flux-istio-gitlab-harbor/part-05/#gitlab-upgrade" class="sidebar-link">GitLab upgrade</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="flux-helm-chart-operations"><a href="#flux-helm-chart-operations" class="header-anchor">#</a> Flux Helm Chart operations</h1> <p>Demo of the HelmRelease operations and Flux.</p> <h2 id="install-gitlab-using-flux"><a href="#install-gitlab-using-flux" class="header-anchor">#</a> Install GitLab using flux</h2> <p>Install GitLab</p> <div class="language-bash extra-class"><pre class="language-bash"><code>envsubst <span class="token operator">&lt;</span> files/flux-repository/namespaces/gitlab-ns.yaml                          <span class="token operator">&gt;</span> tmp/k8s-flux-repository/namespaces/gitlab-ns.yaml
+envsubst <span class="token operator">&lt;</span> files/flux-repository/releases/gitlab-release.yaml                       <span class="token operator">&gt;</span> tmp/k8s-flux-repository/releases/gitlab-release.yaml
+envsubst <span class="token operator">&lt;</span> files/flux-repository/workloads/gitlab-custom-ca.yaml                    <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/gitlab-custom-ca.yaml
+envsubst <span class="token operator">&lt;</span> files/flux-repository/workloads/gitlab-gitlab-initial-root-password.yaml <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/gitlab-gitlab-initial-root-password.yaml
+envsubst <span class="token operator">&lt;</span> files/flux-repository/workloads/gitlab-services.yaml                     <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/gitlab-services.yaml
+
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Add GitLab&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'namespaces/gitlab-ns.yaml'
+add 'releases/gitlab-release.yaml'
+add 'workloads/gitlab-custom-ca.yaml'
+add 'workloads/gitlab-gitlab-initial-root-password.yaml'
+add 'workloads/gitlab-services.yaml'
+[master 691c4f2] Add GitLab
+ 5 files changed, 193 insertions(+)
+ create mode 100644 namespaces/gitlab-ns.yaml
+ create mode 100644 releases/gitlab-release.yaml
+ create mode 100644 workloads/gitlab-custom-ca.yaml
+ create mode 100644 workloads/gitlab-gitlab-initial-root-password.yaml
+ create mode 100644 workloads/gitlab-services.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 691c4f2
+Waiting for 691c4f2 to be applied ...
+Done.
+</code></pre></div><h2 id="run-and-application-via-flux-helmrelease"><a href="#run-and-application-via-flux-helmrelease" class="header-anchor">#</a> Run and application via Flux &quot;HelmRelease&quot;</h2> <p>Create <code>HelmRelease</code> and <code>VirtualService</code> files:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>envsubst <span class="token operator">&lt;&lt;</span> <span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> tmp/k8s-flux-repository/releases/podinfo-release.yaml</span>
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: default
+  annotations:
+    flux.weave.works/automated: &quot;false&quot;
+spec:
+  releaseName: podinfo
+  targetNamespace: default
+  chart:
+    repository: https://stefanprodan.github.io/podinfo
+    name: podinfo
+    version: 2.1.1
+  values:
+    service:
+      enabled: true
+    message: Hello ;-)
+EOF</span>
+
+envsubst <span class="token operator">&lt;&lt;</span> <span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> tmp/k8s-flux-repository/workloads/podinfo.yaml</span>
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: podinfo-http-virtual-service
+  namespace: default
+spec:
+  hosts:
+  - podinfo.<span class="token variable">${MY_DOMAIN}</span>
+  gateways:
+  - istio-system/istio-autogenerated-k8s-ingress
+  http:
+  - route:
+    - destination:
+        host: podinfo.default.svc.cluster.local
+        port:
+          number: 9898
+EOF</span>
+</code></pre></div><p>Push the changes to the Git repository:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Add podinfo HelmRelease&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+<span class="token function">sleep</span> <span class="token number">20</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'releases/podinfo-release.yaml'
+add 'workloads/podinfo.yaml'
+[master 03164b6] Add podinfo HelmRelease
+ 2 files changed, 34 insertions(+)
+ create mode 100644 releases/podinfo-release.yaml
+ create mode 100644 workloads/podinfo.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 03164b6
+Waiting for 03164b6 to be applied ...
+Done.
+</code></pre></div><p>List the installed Helm Charts:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">ls</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+podinfo         1               Thu Aug 29 10:35:53 2019        DEPLOYED        podinfo-2.1.1        2.1.1           default
+</code></pre></div><p>Show the history of <code>podinfo</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">history</span> podinfo
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
+1               Thu Aug 29 10:35:53 2019        DEPLOYED        podinfo-2.1.1   Install complete
+</code></pre></div><p>Check the HelmRelease details for <code>podinfo</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl describe helmreleases.flux.weave.works podinfo
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Name:         podinfo
+Namespace:    default
+Labels:       flux.weave.works/sync-gc-mark=sha256.grAYAKjn3uQ_4t8EXwcBCfJndY8XeUwdNz_dOeTJTcs
+Annotations:  flux.weave.works/automated: false
+              flux.weave.works/sync-checksum: 59cb325964b3d10ff647d8426eccf14f8592f437
+              kubectl.kubernetes.io/last-applied-configuration:
+                {&quot;apiVersion&quot;:&quot;flux.weave.works/v1beta1&quot;,&quot;kind&quot;:&quot;HelmRelease&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;flux.weave.works/automated&quot;:&quot;false&quot;,&quot;flux.weave....
+API Version:  flux.weave.works/v1beta1
+Kind:         HelmRelease
+Metadata:
+  Creation Timestamp:  2019-08-29T08:35:53Z
+  Generation:          1
+  Resource Version:    10677
+  Self Link:           /apis/flux.weave.works/v1beta1/namespaces/default/helmreleases/podinfo
+  UID:                 036d2df0-ca38-11e9-8542-026128d6be42
+Spec:
+  Chart:
+    Name:            podinfo
+    Repository:      https://stefanprodan.github.io/podinfo
+    Version:         2.1.1
+  Release Name:      podinfo
+  Target Namespace:  default
+  Values:
+    Message:  Hello ;-)
+    Service:
+      Enabled:  true
+Status:
+  Conditions:
+    Last Transition Time:  2019-08-29T08:35:54Z
+    Last Update Time:      2019-08-29T08:35:54Z
+    Message:               helm install succeeded
+    Reason:                HelmSuccess
+    Status:                True
+    Type:                  Released
+    Last Transition Time:  2019-08-29T08:35:53Z
+    Last Update Time:      2019-08-29T08:36:28Z
+    Message:               chart fetched: podinfo-2.1.1.tgz
+    Reason:                RepoChartInCache
+    Status:                True
+    Type:                  ChartFetched
+  Observed Generation:     1
+  Release Name:            podinfo
+  Release Status:          DEPLOYED
+  Revision:                2.1.1
+  Values Checksum:         d16a2a7c9df4d3b7e98f4dd15ba8f9a83b4d05305f3830567d9372e6f088097e
+Events:
+  Type    Reason       Age                From           Message
+  ----    ------       ----               ----           -------
+  Normal  ChartSynced  29s (x2 over 63s)  helm-operator  Chart managed by HelmRelease processed
+</code></pre></div><p>List the running pods:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl get pods
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME                       READY   STATUS    RESTARTS   AGE
+podinfo-85d47bf859-bt6h6   1/1     Running   0          71s
+</code></pre></div><p>Get the pod's image version:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl describe pods <span class="token operator">|</span> <span class="token function">grep</span> Image:
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>    Image:         stefanprodan/podinfo:2.1.1
+</code></pre></div><p>List the Flux workloads:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-workloads
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                     CONTAINER  IMAGE                       RELEASE   POLICY
+default:deployment/podinfo   podinfo    stefanprodan/podinfo:2.1.1  ready
+default:helmrelease/podinfo                                         DEPLOYED
+</code></pre></div><p>List the images discovered by Flux:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>fluxctl list-images <span class="token parameter variable">-n</span> default <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>WORKLOAD                     CONTAINER  IMAGE                 CREATED
+default:deployment/podinfo   podinfo    stefanprodan/podinfo
+                                        |   2.1.3             13 Aug 19 09:33 UTC
+                                        |   latest            13 Aug 19 09:33 UTC
+                                        |   2.1.2             13 Aug 19 07:53 UTC
+                                        '-&gt; 2.1.1             13 Aug 19 07:51 UTC
+                                            2.1.0             07 Aug 19 13:18 UTC
+...
+default:helmrelease/podinfo
+</code></pre></div><p>Upgrade the <code>podinfo</code> Helm Chart to <code>2.1.3</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">&quot;s/version: 2.1.1/version: 2.1.3/&quot;</span> tmp/k8s-flux-repository/releases/podinfo-release.yaml
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">diff</span> releases/podinfo-release.yaml
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Increase podinfo Helm version&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'releases/podinfo-release.yaml'
+[master 954ab8e] Increase podinfo Helm version
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 954ab8e
+Waiting for 954ab8e to be applied ...
+Done.
+</code></pre></div><p>List the release history of <code>podinfo</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">history</span> podinfo
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>REVISION        UPDATED                         STATUS          CHART           DESCRIPTION
+1               Thu Aug 29 10:35:53 2019        SUPERSEDED      podinfo-2.1.1   Install complete
+2               Thu Aug 29 10:39:39 2019        DEPLOYED        podinfo-2.1.3   Upgrade complete
+</code></pre></div><p>Check the <code>HelmRelease</code> details:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl describe helmreleases.flux.weave.works podinfo
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>Name:         podinfo
+Namespace:    default
+Labels:       flux.weave.works/sync-gc-mark=sha256.grAYAKjn3uQ_4t8EXwcBCfJndY8XeUwdNz_dOeTJTcs
+Annotations:  flux.weave.works/automated: false
+              flux.weave.works/sync-checksum: 67cb807881a41e240fb226cf33885f6e88a03168
+              kubectl.kubernetes.io/last-applied-configuration:
+                {&quot;apiVersion&quot;:&quot;flux.weave.works/v1beta1&quot;,&quot;kind&quot;:&quot;HelmRelease&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;flux.weave.works/automated&quot;:&quot;false&quot;,&quot;flux.weave....
+API Version:  flux.weave.works/v1beta1
+Kind:         HelmRelease
+Metadata:
+  Creation Timestamp:  2019-08-29T08:35:53Z
+  Generation:          2
+  Resource Version:    11198
+  Self Link:           /apis/flux.weave.works/v1beta1/namespaces/default/helmreleases/podinfo
+  UID:                 036d2df0-ca38-11e9-8542-026128d6be42
+Spec:
+  Chart:
+    Name:            podinfo
+    Repository:      https://stefanprodan.github.io/podinfo
+    Version:         2.1.3
+  Release Name:      podinfo
+  Target Namespace:  default
+  Values:
+    Message:  Hello ;-)
+    Service:
+      Enabled:  true
+Status:
+  Conditions:
+    Last Transition Time:  2019-08-29T08:35:53Z
+    Last Update Time:      2019-08-29T08:39:38Z
+    Message:               chart fetched: podinfo-2.1.3.tgz
+    Reason:                RepoChartInCache
+    Status:                True
+    Type:                  ChartFetched
+    Last Transition Time:  2019-08-29T08:35:54Z
+    Last Update Time:      2019-08-29T08:39:39Z
+    Message:               helm upgrade succeeded
+    Reason:                HelmSuccess
+    Status:                True
+    Type:                  Released
+  Observed Generation:     2
+  Release Name:            podinfo
+  Release Status:          DEPLOYED
+  Revision:                2.1.3
+  Values Checksum:         d16a2a7c9df4d3b7e98f4dd15ba8f9a83b4d05305f3830567d9372e6f088097e
+Events:
+  Type    Reason       Age                  From           Message
+  ----    ------       ----                 ----           -------
+  Normal  ChartSynced  73s (x4 over 4m58s)  helm-operator  Chart managed by HelmRelease processed
+</code></pre></div><p>Check the Helm Charts:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">ls</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+podinfo         2               Thu Aug 29 10:39:39 2019        DEPLOYED        podinfo-2.1.3        2.1.3           default
+</code></pre></div><p>Let's remove the podinfo Helm chart:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">rm</span> tmp/k8s-flux-repository/releases/podinfo-release.yaml
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Remove podinfo Helm Chart&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>remove 'releases/podinfo-release.yaml'
+[master bd15a3a] Remove podinfo Helm Chart
+ 1 file changed, 18 deletions(-)
+ delete mode 100644 releases/podinfo-release.yaml
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is bd15a3a
+Waiting for bd15a3a to be applied ...
+Done.
+</code></pre></div><p>Check the Helm Charts:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">ls</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          1               Thu Aug 29 10:34:40 2019        DEPLOYED        gitlab-2.2.0         12.2.0          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+</code></pre></div><h2 id="gitlab-upgrade"><a href="#gitlab-upgrade" class="header-anchor">#</a> GitLab upgrade</h2> <p>Open the GitLab URL ( <code>root</code> / <code>admin123</code> ) and check the version (<code>12.2.0</code>)
+in the &quot;Admin&quot; area:</p> <ul><li><a href="https://gitlab.mylabs.dev" target="_blank" rel="noopener noreferrer">https://gitlab.mylabs.dev<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>, <a href="http://gitlab.mylabs.dev" target="_blank" rel="noopener noreferrer">http://gitlab.mylabs.dev<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><code>ssh://gitlab.mylabs.dev</code></li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-x</span> /usr/bin/chromium-browser <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> chromium-browser https://gitlab.mylabs.dev <span class="token operator">&amp;</span> <span class="token keyword">fi</span>
+</code></pre></div><p>Upgrade GitLab to version <code>12.2.1</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">&quot;s/version: 2.2.0/version: 2.2.1/&quot;</span> tmp/k8s-flux-repository/releases/gitlab-release.yaml
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository <span class="token function">add</span> <span class="token parameter variable">--verbose</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository commit <span class="token parameter variable">-m</span> <span class="token string">&quot;Increase GitLab Helm version&quot;</span>
+<span class="token function">git</span> <span class="token parameter variable">-C</span> tmp/k8s-flux-repository push <span class="token parameter variable">-q</span>
+fluxctl <span class="token function">sync</span>
+<span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">[</span> <span class="token variable">$COUNTER</span> <span class="token parameter variable">-lt</span> <span class="token number">25</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token assign-left variable">COUNTER</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>COUNTER<span class="token operator">+</span><span class="token number">1</span><span class="token variable">))</span></span><span class="token punctuation">;</span> <span class="token builtin class-name">echo</span> <span class="token punctuation">;</span> kubectl get pods <span class="token parameter variable">-n</span> gitlab <span class="token punctuation">;</span> <span class="token function">sleep</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>add 'releases/gitlab-release.yaml'
+[master 581de58] Increase GitLab Helm version
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Synchronizing with git@github.com:ruzickap/k8s-flux-repository
+Revision of master to apply is 581de58
+Waiting for 581de58 to be applied ...
+Done.
+...
+NAME                                       READY   STATUS            RESTARTS   AGE
+gitlab-gitaly-0                            1/1     Terminating       0          9m50s
+gitlab-gitlab-monitor-54c8678797-cknps     1/1     Running           0          9m51s
+gitlab-gitlab-monitor-7886dc78bb-dvpgr     0/1     PodInitializing   0          7s
+gitlab-gitlab-shell-7b56949489-vhn72       1/1     Running           0          9m51s
+gitlab-gitlab-shell-7b56949489-zlfsz       1/1     Running           0          9m34s
+gitlab-gitlab-shell-7d5875b7f8-lcvqb       0/1     PodInitializing   0          7s
+gitlab-migrations.2-8bbgg                  0/1     PodInitializing   0          7s
+gitlab-minio-5746f7f7c7-bckgb              1/1     Running           0          9m50s
+gitlab-minio-create-buckets.2-z8c9b        0/1     Completed         0          7s
+gitlab-postgresql-554d9fc6d5-fk627         2/2     Running           0          9m50s
+gitlab-redis-78549bd659-hwsjd              2/2     Running           0          9m50s
+gitlab-sidekiq-all-in-1-6f4947dc45-z9p9n   0/1     Init:1/3          0          7s
+gitlab-sidekiq-all-in-1-7bfc6b75-44wmv     1/1     Running           0          9m50s
+gitlab-task-runner-6dfd9d767-spdhf         1/1     Terminating       0          9m50s
+gitlab-unicorn-6d755544d6-s8g4s            0/2     Init:2/3          0          7s
+gitlab-unicorn-7d7c54b787-6cm8f            2/2     Running           0          9m34s
+gitlab-unicorn-7d7c54b787-r8fvv            2/2     Running           0          9m50s
+...
+</code></pre></div><p>Verify if all the GitLab pods are running:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>kubectl get pods <span class="token parameter variable">-n</span> gitlab
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME                                       READY   STATUS      RESTARTS   AGE
+gitlab-gitaly-0                            1/1     Running     0          3m22s
+gitlab-gitlab-monitor-7886dc78bb-dvpgr     1/1     Running     0          3m59s
+gitlab-gitlab-shell-7d5875b7f8-lcvqb       1/1     Running     0          3m59s
+gitlab-gitlab-shell-7d5875b7f8-p4bw2       1/1     Running     0          3m32s
+gitlab-migrations.2-8bbgg                  0/1     Completed   0          3m59s
+gitlab-minio-5746f7f7c7-bckgb              1/1     Running     0          13m
+gitlab-minio-create-buckets.2-z8c9b        0/1     Completed   0          3m59s
+gitlab-postgresql-554d9fc6d5-fk627         2/2     Running     0          13m
+gitlab-redis-78549bd659-hwsjd              2/2     Running     0          13m
+gitlab-sidekiq-all-in-1-6f4947dc45-z9p9n   1/1     Running     0          3m59s
+gitlab-task-runner-6cd5894bf6-qhp8n        1/1     Running     0          3m21s
+gitlab-unicorn-6d755544d6-d7vqz            2/2     Running     0          2m31s
+gitlab-unicorn-6d755544d6-s8g4s            2/2     Running     0          3m59s
+</code></pre></div><p>Then verify the GitLab version again (should be <code>12.2.1</code>).</p> <div class="language-bash extra-class"><pre class="language-bash"><code>helm <span class="token function">ls</span>
+</code></pre></div><p>Output:</p> <div class="language-text extra-class"><pre class="language-text"><code>NAME            REVISION        UPDATED                         STATUS          CHART                APP VERSION     NAMESPACE
+cert-manager    1               Thu Aug 29 09:40:16 2019        DEPLOYED        cert-manager-v0.9.0  v0.9.0          cert-manager
+flux            1               Thu Aug 29 09:39:10 2019        DEPLOYED        flux-0.12.0          1.13.3          flux
+gitlab          2               Thu Aug 29 10:44:09 2019        DEPLOYED        gitlab-2.2.1         12.2.1          gitlab
+harbor          1               Thu Aug 29 09:46:13 2019        DEPLOYED        harbor-1.1.1         1.8.1           harbor
+istio           1               Thu Aug 29 09:42:29 2019        DEPLOYED        istio-1.2.5          1.2.5           istio-system
+istio-init      1               Thu Aug 29 09:41:22 2019        DEPLOYED        istio-init-1.2.5     1.2.5           istio-system
+kubed           1               Thu Aug 29 09:40:48 2019        DEPLOYED        kubed-0.9.0          0.9.0           kubed
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ruzickap/k8s-flux-istio-gitlab-harbor/edit/master/docs/part-05/README.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">6/30/2024, 3:12:58 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/k8s-flux-istio-gitlab-harbor/part-04/" class="prev">
+        Flux image operations
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/k8s-flux-istio-gitlab-harbor/assets/js/app.5d525693.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/2.a27de003.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/1.30a6593f.js" defer></script><script src="/k8s-flux-istio-gitlab-harbor/assets/js/27.8741302e.js" defer></script>
+  </body>
+</html>
